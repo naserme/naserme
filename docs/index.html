@@ -260,7 +260,7 @@
       .nav-links.open { display: flex; }
       .nav-links a { padding: 12px 10px; }
       .nav-cta { justify-content: center; margin-top: 7px; }
-      .language-toggle { width: 100%; margin-top: 8px; }
+      .language-toggle { min-width: 76px; margin: 0; padding: 9px 11px; }
       .hero { padding-top: 55px; }
       h1 { font-size: clamp(43px, 13vw, 62px); }
       .hero-visual { min-height: 290px; }
@@ -296,8 +296,8 @@
         <a href="#projects" data-i18n="navProjects">Projects</a>
         <a href="#stats" data-i18n="navGithub">GitHub</a>
         <a class="nav-cta" href="#contact"><span data-i18n="navContact">Let's connect</span> <span aria-hidden="true">↗</span></a>
-        <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">فارسی</button>
       </div>
+      <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">فارسی</button>
     </nav>
   </header>
 
@@ -645,9 +645,9 @@
       const map = [
         [".nav-links a[href='#about']","navAbout"],[".nav-links a[href='#stack']","navStack"],
         [".nav-links a[href='#projects']","navProjects"],[".nav-links a[href='#stats']","navGithub"],
-        [".eyebrow","heroEyebrow"],[".hero-copy h1","heroTitle",true],[".hero-lead","heroLead",true],
-        [".hero-actions .btn-primary","heroPrimary"],[".hero-actions .btn-secondary","heroSecondary"],
-        [".quick-facts span:nth-child(1)","factOne"],[".quick-facts span:nth-child(2)","factTwo"],[".quick-facts span:nth-child(3)","factThree"],
+        [".eyebrow","heroEyebrow",true],[".hero-copy h1","heroTitle",true],[".hero-lead","heroLead",true],
+        [".hero-actions .btn-primary","heroPrimary",true],[".hero-actions .btn-secondary","heroSecondary",true],
+        [".quick-facts span:nth-child(1)","factOne",true],[".quick-facts span:nth-child(2)","factTwo",true],[".quick-facts span:nth-child(3)","factThree",true],
         [".float-one span:last-child","floatOne"],[".float-two span:last-child","floatTwo"],
         ["#about .section-kicker","aboutKicker"],["#about h2","aboutTitle"],["#about .section-sub","aboutSub"],
         ["#about .about-copy p:nth-child(1)","aboutP1",true],["#about .about-copy p:nth-child(2)","aboutP2",true],["#about .about-copy p:nth-child(3)","aboutP3"],
@@ -683,7 +683,13 @@
       const cta = document.querySelector(".nav-cta");
       if (cta) cta.innerHTML = '<span>'+t.navContact+'</span> <span aria-hidden="true">↗</span>';
       const status = document.getElementById("activityStatus");
-      if (status && (status.querySelector(".loading-dot") || status.textContent.includes("GitHub"))) status.innerHTML = '<span class="loading-dot"></span> '+t.loading;
+      if (status) {
+        if (status.dataset.state === "loaded") status.textContent = t.live;
+        else if (status.dataset.state === "error") {
+          const errorText = status.dataset.errorMessage || t.apiError;
+          status.innerHTML = '<div class="activity-error">'+t.loadError+' '+errorText+' <a href="https://github.com/naserme" target="_blank" rel="noreferrer">'+t.viewGithub+'</a>.</div>';
+        } else status.innerHTML = '<span class="loading-dot"></span> '+t.loading;
+      }
       const activityPlaceholder = document.querySelector("#activityChart .chart-placeholder");
       const languagePlaceholder = document.querySelector("#languageBreakdown .chart-placeholder");
       if (activityPlaceholder) activityPlaceholder.textContent = t.preparingChart;
@@ -711,8 +717,8 @@
         return new Intl.NumberFormat(currentLang === "fa" ? "fa-IR" : "en-US").format(value || 0);
       }
       function setStatus(message, ok) {
-        const text = ok ? translations[currentLang].live : message;
-        status.textContent = text;
+        status.textContent = ok ? translations[currentLang].live : message;
+        status.dataset.state = ok ? "loaded" : "loading";
         status.style.color = ok ? "#6ee7c1" : "#9fb2cc";
       }
       function renderActivity(events) {
@@ -821,12 +827,17 @@
         renderLanguages(data.languages);
         setStatus("",true);
       } catch (error) {
+        status.dataset.state = "error";
+        status.dataset.errorMessage = error.message;
         status.innerHTML = '<div class="activity-error">'+translations[currentLang].loadError+' '+String(error.message).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];})+' <a href="https://github.com/naserme" target="_blank" rel="noreferrer">'+translations[currentLang].viewGithub+'</a>.</div>';
         document.getElementById("activityChart").innerHTML = '<div class="chart-placeholder">'+translations[currentLang].chartUnavailable+'</div>';
         document.getElementById("languageBreakdown").innerHTML = '<div class="chart-placeholder">'+translations[currentLang].languagesUnavailable+'</div>';
       }
       window.refreshGithubActivityLanguage = function() {
-        if (latestActivityEvents) renderActivity(latestActivityEvents);
+        if (latestActivityEvents) {
+          renderActivity(latestActivityEvents);
+          setStatus("",true);
+        }
         if (latestLanguagesData) renderLanguages(latestLanguagesData);
       };
     })();
