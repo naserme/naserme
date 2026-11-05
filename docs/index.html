@@ -178,6 +178,32 @@
     .github-wide { margin-top: 18px; }
     .github-wide img { display: block; width: 100%; border-radius: 12px; }
     .stats-note { color: #7f91aa; font-size: 11px; margin: 17px 2px 0; }
+    .activity-status { display: flex; align-items: center; gap: 10px; color: #9fb2cc; font-size: 12px; margin: 0 0 17px 2px; min-height: 20px; }
+    .loading-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 5px rgba(56,189,248,.12); animation: pulse 1.4s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity: .35; transform: scale(.8); } }
+    .activity-metrics { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
+    .metric-card { min-width: 0; padding: 18px; border-radius: 16px; border: 1px solid rgba(148,163,184,.12); background: rgba(148,163,184,.045); }
+    .metric-card span { display: block; color: #9fb1c9; font-size: 11px; font-weight: 700; }
+    .metric-card strong { display: block; margin: 9px 0 2px; color: #e9f7ff; font: 700 clamp(26px,3vw,34px)/1.1 "Space Grotesk",sans-serif; letter-spacing: -.05em; }
+    .metric-card small { color: #70839e; font-size: 10px; }
+    .activity-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 14px; margin-top: 14px; }
+    .activity-chart-card { min-width: 0; padding: 21px; border-radius: 17px; border: 1px solid rgba(148,163,184,.12); background: rgba(7,14,27,.5); }
+    .activity-card-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .activity-card-head .section-kicker { margin-bottom: 3px; font-size: 9px; }
+    .activity-card-head h3 { margin: 0; color: #e5f2ff; font: 600 16px "Space Grotesk",sans-serif; }
+    .chart-legend { display: inline-flex; align-items: center; gap: 7px; color: #91a4bd; font-size: 10px; }
+    .chart-legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: #38bdf8; }
+    .activity-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .chart-placeholder { display: grid; place-items: center; min-height: 160px; color: #7286a2; font-size: 12px; }
+    .language-breakdown { display: grid; gap: 15px; padding-top: 6px; }
+    .language-row { display: grid; gap: 7px; }
+    .language-meta { display: flex; justify-content: space-between; gap: 10px; color: #b8c9df; font-size: 11px; }
+    .language-meta strong { color: #e7f4ff; font-weight: 700; }
+    .language-track { height: 7px; overflow: hidden; border-radius: 999px; background: rgba(148,163,184,.12); }
+    .language-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg,#38bdf8,#2dd4bf); }
+    .language-row:nth-child(2n) .language-fill { background: linear-gradient(90deg,#a78bfa,#60a5fa); }
+    .activity-error { padding: 18px; border: 1px solid rgba(251,191,36,.18); border-radius: 14px; color: #d8c69a; background: rgba(120,83,18,.08); font-size: 12px; line-height: 1.7; }
+    .activity-error a { color: #7dd3fc; text-decoration: underline; text-underline-offset: 3px; }
     .contact-card { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 34px; overflow: hidden; }
     .contact-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 88% 25%, rgba(56,189,248,.16), transparent 28rem); }
     .contact-copy, .contact-actions { position: relative; z-index: 1; }
@@ -392,17 +418,27 @@
           <p class="section-sub">A live snapshot of my public GitHub activity and the languages used across my repositories.</p>
         </div>
         <div class="glass-card github-panel reveal">
-          <div class="github-stats">
-            <img src="https://github-readme-stats.vercel.app/api?username=naserme&show_icons=true&theme=tokyonight&hide_border=true&rank_icon=github&include_all_commits=true" alt="GitHub account statistics for naserme" loading="lazy">
-            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=naserme&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" alt="Most used programming languages" loading="lazy">
+          <div class="activity-status" id="activityStatus" role="status" aria-live="polite">
+            <span class="loading-dot"></span> Loading public GitHub data…
           </div>
-          <div class="github-wide">
-            <img src="https://streak-stats.demolab.com?user=naserme&theme=tokyonight&hide_border=true" alt="GitHub contribution streak" loading="lazy">
+          <div class="activity-metrics" id="activityMetrics">
+            <article class="metric-card"><span>Public repositories</span><strong id="statRepos">—</strong><small>Available projects</small></article>
+            <article class="metric-card"><span>Followers</span><strong id="statFollowers">—</strong><small>GitHub community</small></article>
+            <article class="metric-card"><span>Repository stars</span><strong id="statStars">—</strong><small>Across public repos</small></article>
+            <article class="metric-card"><span>Recent push commits</span><strong id="statCommits">—</strong><small>From recent public events</small></article>
           </div>
-          <div class="github-wide">
-            <img src="https://github-readme-activity-graph.vercel.app/graph?username=naserme&theme=tokyo-night&hide_border=true&area=true" alt="GitHub contribution activity graph" loading="lazy">
+          <div class="activity-grid">
+            <div class="activity-chart-card">
+              <div class="activity-card-head"><div><span class="section-kicker">Last 30 days</span><h3>Public GitHub activity</h3></div><span class="chart-legend"><i></i> Events</span></div>
+              <div id="activityChart" class="activity-chart"><div class="chart-placeholder">Preparing activity chart…</div></div>
+            </div>
+            <div class="activity-chart-card">
+              <div class="activity-card-head"><div><span class="section-kicker">Code distribution</span><h3>Top languages</h3></div></div>
+              <div id="languageBreakdown" class="language-breakdown"><div class="chart-placeholder">Loading repository languages…</div></div>
+            </div>
           </div>
-          <p class="stats-note">Stats are provided by third-party services and may occasionally be delayed or unavailable.</p>
+          <p class="stats-note" id="activityFootnote">Data comes directly from GitHub's public API. The activity chart uses recent public events, not private contribution data.</p>
+          <noscript><p class="stats-note">Enable JavaScript to load live GitHub statistics.</p></noscript>
         </div>
       </div>
     </section>
@@ -460,6 +496,129 @@
     document.querySelectorAll(".reveal").forEach(function (element) {
       revealObserver.observe(element);
     });
+
+    // Render GitHub activity locally from the public GitHub REST API.
+    // This avoids relying on third-party SVG card generators.
+    (async function loadGithubActivity() {
+      const status = document.getElementById("activityStatus");
+      const cacheKey = "naserme-github-activity-v1";
+      const cacheDuration = 15 * 60 * 1000;
+
+      function formatNumber(value) {
+        return new Intl.NumberFormat("en-US").format(value || 0);
+      }
+      function setStatus(message, ok) {
+        status.textContent = message;
+        status.style.color = ok ? "#6ee7c1" : "#9fb2cc";
+      }
+      function renderActivity(events) {
+        const now = new Date();
+        const days = [];
+        for (let i = 29; i >= 0; i--) {
+          const day = new Date(now);
+          day.setHours(0,0,0,0);
+          day.setDate(day.getDate() - i);
+          days.push({ key: day.toISOString().slice(0,10), count: 0 });
+        }
+        const lookup = new Map(days.map((day,index) => [day.key,index]));
+        let pushCommits = 0;
+        events.forEach(function (event) {
+          const date = new Date(event.created_at);
+          const key = date.getFullYear()+"-"+String(date.getMonth()+1).padStart(2,"0")+"-"+String(date.getDate()).padStart(2,"0");
+          const index = lookup.get(key);
+          if (index === undefined) return;
+          days[index].count += 1;
+          if (event.type === "PushEvent") pushCommits += Math.max(1, (event.payload && event.payload.commits && event.payload.commits.length) || 1);
+        });
+        document.getElementById("statCommits").textContent = formatNumber(pushCommits);
+        const max = Math.max(1,...days.map(day => day.count));
+        const width = 760, height = 190, left = 18, top = 16, chartHeight = 135;
+        const slot = (width - left * 2) / days.length;
+        const barWidth = Math.max(5,slot * .58);
+        const bars = days.map(function(day,index) {
+          const barHeight = day.count ? Math.max(4,(day.count/max)*chartHeight) : 2;
+          const x = left + index*slot + (slot-barWidth)/2;
+          const y = top + chartHeight - barHeight;
+          const opacity = day.count ? .45 + .55*(day.count/max) : .12;
+          return '<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+barWidth.toFixed(1)+'" height="'+barHeight.toFixed(1)+'" rx="3" fill="#38bdf8" opacity="'+opacity.toFixed(2)+'"><title>'+day.key+': '+day.count+' public events</title></rect>';
+        }).join("");
+        const grid = [0,.5,1].map(function(level) {
+          const y = top + chartHeight - level*chartHeight;
+          return '<line x1="'+left+'" y1="'+y+'" x2="'+(width-left)+'" y2="'+y+'" stroke="#64748b" stroke-opacity=".22" stroke-dasharray="3 5"/>';
+        }).join("");
+        const labels = [0,6,13,20,27].map(function(index) {
+          const x = left + index*slot;
+          const date = new Date(days[index].key+"T12:00:00");
+          const label = date.toLocaleDateString("en-US",{month:"short",day:"numeric"});
+          return '<text x="'+x.toFixed(1)+'" y="176" fill="#71839d" font-size="10">'+label+'</text>';
+        }).join("");
+        document.getElementById("activityChart").innerHTML =
+          '<svg viewBox="0 0 '+width+' '+height+'" role="img" aria-label="Public GitHub events during the last 30 days">'+grid+bars+labels+'</svg>';
+      }
+      function renderLanguages(languages) {
+        const entries = Object.entries(languages).sort((a,b)=>b[1]-a[1]).slice(0,6);
+        const total = entries.reduce((sum,item)=>sum+item[1],0);
+        const target = document.getElementById("languageBreakdown");
+        if (!total) {
+          target.innerHTML = '<div class="chart-placeholder">No public language data available yet.</div>';
+          return;
+        }
+        target.innerHTML = entries.map(function(entry) {
+          const percentage = (entry[1]/total)*100;
+          const safeName = entry[0].replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];});
+          return '<div class="language-row"><div class="language-meta"><span>'+safeName+'</span><strong>'+percentage.toFixed(1)+'%</strong></div><div class="language-track"><div class="language-fill" style="width:'+percentage.toFixed(2)+'%"></div></div></div>';
+        }).join("");
+      }
+      async function getData() {
+        const cached = localStorage.getItem(cacheKey);
+        if (cached) {
+          try {
+            const parsed = JSON.parse(cached);
+            if (Date.now()-parsed.savedAt < cacheDuration) return parsed.data;
+          } catch (_) { localStorage.removeItem(cacheKey); }
+        }
+        const headers = { "Accept": "application/vnd.github+json" };
+        async function get(url) {
+          const response = await fetch(url,{headers:headers});
+          if (!response.ok) throw new Error(response.status === 403 ? "GitHub API rate limit reached. Please refresh later." : "GitHub API returned "+response.status+".");
+          return response.json();
+        }
+        const [user,repositories,events] = await Promise.all([
+          get("https://api.github.com/users/naserme"),
+          get("https://api.github.com/users/naserme/repos?type=public&per_page=100&sort=updated"),
+          get("https://api.github.com/users/naserme/events/public?per_page=100")
+        ]);
+        const ownRepos = repositories.filter(repo => !repo.fork);
+        const languageRepos = ownRepos.slice(0,12);
+        const languageResults = await Promise.all(languageRepos.map(repo => get(repo.languages_url).catch(()=>({}))));
+        const languages = {};
+        languageResults.forEach(function(result) {
+          Object.entries(result).forEach(function(entry) { languages[entry[0]] = (languages[entry[0]] || 0) + entry[1]; });
+        });
+        const data = {
+          followers: user.followers || 0,
+          repositories: ownRepos.length,
+          stars: ownRepos.reduce((sum,repo)=>sum+(repo.stargazers_count||0),0),
+          events: events.filter(event => Date.now()-new Date(event.created_at).getTime() <= 30*24*60*60*1000),
+          languages: languages
+        };
+        try { localStorage.setItem(cacheKey,JSON.stringify({savedAt:Date.now(),data:data})); } catch (_) {}
+        return data;
+      }
+      try {
+        const data = await getData();
+        document.getElementById("statRepos").textContent = formatNumber(data.repositories);
+        document.getElementById("statFollowers").textContent = formatNumber(data.followers);
+        document.getElementById("statStars").textContent = formatNumber(data.stars);
+        renderActivity(data.events);
+        renderLanguages(data.languages);
+        setStatus("Live data loaded from GitHub · refreshed every 15 minutes",true);
+      } catch (error) {
+        status.innerHTML = '<div class="activity-error">Live GitHub data could not be loaded: '+String(error.message).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];})+' <a href="https://github.com/naserme" target="_blank" rel="noreferrer">View GitHub profile</a>.</div>';
+        document.getElementById("activityChart").innerHTML = '<div class="chart-placeholder">Activity chart unavailable</div>';
+        document.getElementById("languageBreakdown").innerHTML = '<div class="chart-placeholder">Language data unavailable</div>';
+      }
+    })();
   </script>
 </body>
 </html>
