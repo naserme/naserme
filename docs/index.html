@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23080d19'/%3E%3Ctext x='50' y='66' font-size='56' text-anchor='middle' fill='%2338bdf8' font-family='Arial' font-weight='700'%3EN%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       color-scheme: dark;
@@ -87,6 +87,23 @@
     }
     .nav-cta:hover { transform: translateY(-2px); background: rgba(14,165,233,.15); border-color: rgba(56,189,248,.6); }
     .menu-toggle { display: none; border: 1px solid var(--line); background: var(--panel); color: var(--text); border-radius: 11px; width: 42px; height: 42px; cursor: pointer; }
+    .language-toggle { display: inline-flex; align-items: center; justify-content: center; min-width: 84px; padding: 9px 13px; border-radius: 11px; border: 1px solid rgba(167,139,250,.35); color: #e4dcff; background: rgba(139,92,246,.11); font-size: 12px; font-weight: 800; cursor: pointer; transition: .2s ease; }
+    .language-toggle:hover { transform: translateY(-2px); border-color: rgba(167,139,250,.65); background: rgba(139,92,246,.2); }
+    html[dir="rtl"] body { font-family: "Vazirmatn", Tahoma, sans-serif; }
+    html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3, html[dir="rtl"] .brand { font-family: "Vazirmatn", Tahoma, sans-serif; letter-spacing: 0; }
+    html[dir="rtl"] .eyebrow, html[dir="rtl"] .section-kicker { letter-spacing: 0; text-transform: none; }
+    html[dir="rtl"] .float-one { left: auto; right: -4px; }
+    html[dir="rtl"] .float-two { right: auto; left: -2px; }
+    html[dir="rtl"] .activity-status { margin: 0 2px 17px 0; }
+    html[dir="rtl"] .language-meta, html[dir="rtl"] .metric-card, html[dir="rtl"] .about-copy, html[dir="rtl"] .contact-copy { text-align: right; }
+    html[dir="rtl"] .activity-chart, html[dir="rtl"] .chart-legend, html[dir="rtl"] .tags { direction: ltr; }
+    html[dir="rtl"] .tags { justify-content: flex-end; }
+    html[dir="rtl"] .quick-facts { direction: rtl; }
+    html[dir="rtl"] .hero-copy { text-align: right; }
+    html[dir="rtl"] .hero-actions { justify-content: flex-start; }
+    html[dir="rtl"] .float-card { direction: rtl; }
+    html[dir="rtl"] .footer-inner { direction: rtl; }
+
     .hero { position: relative; padding: 100px 0 86px; }
     .hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr); align-items: center; gap: 62px; }
     .eyebrow {
@@ -230,6 +247,10 @@
       .hero-actions, .quick-facts { justify-content: center; }
       .about-grid { grid-template-columns: 1fr; }
       .contact-card { align-items: flex-start; flex-direction: column; }
+      html[dir="rtl"] .hero-copy { text-align: center; }
+      html[dir="rtl"] .hero-actions { justify-content: center; }
+      html[dir="rtl"] .float-one { right: -2px; }
+      html[dir="rtl"] .float-two { left: -2px; }
     }
     @media (max-width: 680px) {
       .container { width: min(100% - 30px, var(--max)); }
@@ -239,6 +260,7 @@
       .nav-links.open { display: flex; }
       .nav-links a { padding: 12px 10px; }
       .nav-cta { justify-content: center; margin-top: 7px; }
+      .language-toggle { width: 100%; margin-top: 8px; }
       .hero { padding-top: 55px; }
       h1 { font-size: clamp(43px, 13vw, 62px); }
       .hero-visual { min-height: 290px; }
@@ -269,11 +291,12 @@
       </a>
       <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
       <div class="nav-links" id="navLinks">
-        <a href="#about">About</a>
-        <a href="#stack">Tech Stack</a>
-        <a href="#projects">Projects</a>
-        <a href="#stats">GitHub</a>
-        <a class="nav-cta" href="#contact">Let's connect <span aria-hidden="true">↗</span></a>
+        <a href="#about" data-i18n="navAbout">About</a>
+        <a href="#stack" data-i18n="navStack">Tech Stack</a>
+        <a href="#projects" data-i18n="navProjects">Projects</a>
+        <a href="#stats" data-i18n="navGithub">GitHub</a>
+        <a class="nav-cta" href="#contact"><span data-i18n="navContact">Let's connect</span> <span aria-hidden="true">↗</span></a>
+        <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">فارسی</button>
       </div>
     </nav>
   </header>
@@ -496,6 +519,180 @@
     document.querySelectorAll(".reveal").forEach(function (element) {
       revealObserver.observe(element);
     });
+
+
+    // Bilingual interface: English by default, with a persistent Persian/RTL mode.
+    let currentLang = "en";
+    const translations = {
+      fa: {
+        navAbout:"درباره من",navStack:"مهارت‌ها",navProjects:"پروژه‌ها",navGithub:"گیت‌هاب",navContact:"ارتباط با من",
+        heroEyebrow:"توسعه‌دهنده فول‌استک · مهندسی با کمک هوش مصنوعی",
+        heroTitle:"ایده‌ها را به <span class=\"gradient-text\">محصول واقعی</span> تبدیل می‌کنم.",
+        heroLead:"من <strong>ناصر مقبل</strong> هستم؛ توسعه‌دهنده‌ای که در تمام لایه‌های یک محصول نرم‌افزاری کار می‌کند. از سیستم‌های بک‌اند و API تا رابط کاربری، خودکارسازی و استقرار؛ از ابزارهای مدرن و گردش‌کارهای مبتنی بر هوش مصنوعی برای تبدیل ایده‌ها به نرم‌افزار واقعی استفاده می‌کنم.",
+        heroPrimary:"مشاهده پروژه‌ها",heroSecondary:"مشاهده گیت‌هاب",
+        factOne:"نگاه فول‌استک",factTwo:"توسعه با کمک AI",factThree:"یادگیری مداوم",
+        floatOne:"ساختن · انتشار · بهبود",floatTwo:"مهندسی با کمک هوش مصنوعی",
+        aboutKicker:"کمی درباره من",aboutTitle:"مهندسی با کنجکاوی.",
+        aboutSub:"از کار با فناوری‌های مختلف، حل مسئله‌های واقعی و همراهی با یک محصول از ایده اولیه تا انتشار لذت می‌برم.",
+        aboutP1:"من یک <strong>توسعه‌دهنده فول‌استک</strong> هستم و روی ساخت اپلیکیشن‌های وب کاربردی و قابل نگهداری تمرکز دارم. از منطق بک‌اند و طراحی پایگاه داده تا APIها، تجربه کاربری، یکپارچه‌سازی سرویس‌ها، خودکارسازی و استقرار در چرخه توسعه حضور دارم.",
+        aboutP2:"<strong>هوش مصنوعی بخش مهمی از روش توسعه من است.</strong> از دستیارهای برنامه‌نویسی و ابزارهای عامل‌محور برای بررسی فناوری‌های جدید، کار در فریم‌ورک‌های مختلف، نمونه‌سازی سریع‌تر، عیب‌یابی و بهبود پیاده‌سازی استفاده می‌کنم. با این حال مسئولیت تصمیم‌های معماری، درک کد، بازبینی خروجی AI، تست و نتیجه نهایی با خودم است.",
+        aboutP3:"ترجیح می‌دهم برای هر مسئله ابزار مناسب را انتخاب کنم، نه اینکه همه پروژه‌ها را به یک پشته فناوری محدود کنم.",
+        focusTitle1:"توسعه از ابتدا تا انتها",focusText1:"از مدل‌های داده و API تا رابط کاربری نهایی.",
+        focusTitle2:"مهندسی با کمک هوش مصنوعی",focusText2:"گردش‌کارهای عامل‌محور، بازبینی کد، عیب‌یابی و توسعه سریع‌تر.",
+        focusTitle3:"خودکارسازی و یکپارچه‌سازی",focusText3:"اتصال سرویس‌ها و حذف کارهای تکراری.",
+        focusTitle4:"یادگیری پیوسته",focusText4:"شناخت فریم‌ورک‌ها و فناوری‌ها متناسب با نیاز هر مسئله.",
+        stackKicker:"ابزارهای کار",stackTitle:"پشته فناوری و ابزارها.",
+        stackSub:"مجموعه‌ای منعطف برای ساخت، یکپارچه‌سازی، انتشار و نگهداری نرم‌افزار.",
+        stackBackend:"بک‌اند و زبان‌ها",stackFrontend:"فرانت‌اند و رابط کاربری",stackInfra:"داده، زیرساخت و ابزارها",
+        stackNote:"همچنین تجربه کار با REST API، وب‌سوکت، خودکارسازی و گردش‌کارهای توسعه با کمک هوش مصنوعی.",
+        projectsKicker:"نمونه‌کارهای منتخب",projectsTitle:"چیزهایی که ساخته‌ام.",
+        projectsSub:"چند پروژه که گستره مسئله‌ها و فناوری‌هایی را که به کار با آن‌ها علاقه دارم نشان می‌دهند.",
+        projectDesc1:"یک اپلیکیشن تماشای گروهی و همگام‌سازی ویدئو بین کاربران، با سرور Node.js و WebSocket و پیاده‌سازی مبتنی بر Cloudflare Workers.",
+        projectDesc2:"داشبورد Laravel 12 برای مدیریت فعالیت پیامکی چند وب‌سایت، همراه با گزارش پیام‌ها، محاسبه هزینه و اتصال توسعه‌پذیر به سرویس‌دهندگان پیامک.",
+        projectDesc3:"ابزار آزمایشی ویندوز و Python برای ادغام رکوردهای رمزنگاری‌شده ورود Chrome بین پروفایل‌های محلی، همراه با حالت آزمایشی، گزارش تعارض و بکاپ SQLite.",
+        projectDesc4:"پروژه‌ای با Python برای جمع‌آوری و آماده‌سازی داده آگهی خودرو و آموزش مدل یادگیری ماشین جهت تخمین قیمت خودرو.",
+        statsKicker:"فعالیت متن‌باز",statsTitle:"فعالیت من در GitHub.",
+        statsSub:"نمایی زنده از فعالیت عمومی گیت‌هاب و زبان‌های استفاده‌شده در مخازنم.",
+        metricRepos:"مخازن عمومی",metricReposSmall:"پروژه‌های در دسترس",
+        metricFollowers:"دنبال‌کنندگان",metricFollowersSmall:"جامعه گیت‌هاب",
+        metricStars:"ستاره مخازن",metricStarsSmall:"مجموع ستاره پروژه‌های عمومی",
+        metricCommits:"کامیت‌های اخیر",metricCommitsSmall:"بر اساس رویدادهای عمومی اخیر",
+        activityPeriod:"۳۰ روز گذشته",activityTitle:"فعالیت عمومی GitHub",activityLegend:"رویدادها",
+        languageKicker:"ترکیب کد",languageTitle:"زبان‌های برتر",
+        statsFootnote:"اطلاعات مستقیماً از API عمومی GitHub دریافت می‌شود. نمودار فعالیت، رویدادهای عمومی اخیر را نشان می‌دهد و شامل مشارکت‌های خصوصی نیست.",
+        contactKicker:"چالش جالبی در ذهن داری؟",contactTitle:"بیایید چیزی کاربردی بسازیم.",
+        contactText:"از آشنایی با محصولات خلاقانه، مسئله‌های فنی چالش‌برانگیز و فرصت‌هایی برای ساخت نرم‌افزار مفید استقبال می‌کنم.",
+        contactGithub:"ارتباط در GitHub",contactRepos:"مشاهده همه مخازن",
+        footerText:"© <span id=\"year\"></span> ناصر مقبل. ساخته‌شده با کنجکاوی و کمی کافئین.",
+        backTop:"بازگشت به بالا",menuOpen:"باز کردن منو",menuClose:"بستن منو",
+        loading:"در حال دریافت اطلاعات عمومی GitHub…",live:"اطلاعات زنده از GitHub دریافت شد · به‌روزرسانی هر ۱۵ دقیقه",
+        preparingChart:"در حال آماده‌سازی نمودار فعالیت…",loadingLanguages:"در حال دریافت زبان‌های مخازن…",
+        noLanguages:"هنوز اطلاعاتی از زبان مخازن عمومی در دسترس نیست.",
+        chartUnavailable:"نمودار فعالیت در دسترس نیست",languagesUnavailable:"اطلاعات زبان‌ها در دسترس نیست",
+        apiRate:"محدودیت درخواست API گیت‌هاب اعمال شده است. کمی بعد دوباره تلاش کنید.",
+        apiError:"دریافت اطلاعات از API گیت‌هاب ناموفق بود.",
+        loadError:"دریافت اطلاعات زنده GitHub ممکن نشد:",viewGithub:"مشاهده پروفایل GitHub",
+        eventsAria:"رویدادهای عمومی GitHub در ۳۰ روز گذشته"
+      },
+      en: {
+        navAbout:"About",navStack:"Tech Stack",navProjects:"Projects",navGithub:"GitHub",navContact:"Let's connect",
+        heroEyebrow:"Full-Stack Developer · AI-Assisted Engineering",
+        heroTitle:"Turning ideas into <span class=\"gradient-text\">real products.</span>",
+        heroLead:"I'm <strong>Naser Moghbel</strong> — a developer building across the full stack. From backend systems and APIs to polished interfaces, automation, and deployment, I use modern tools and AI-assisted workflows to turn ambitious ideas into working software.",
+        heroPrimary:"Explore my work",heroSecondary:"Visit GitHub",
+        factOne:"Full-stack mindset",factTwo:"AI-powered workflow",factThree:"Always learning",
+        floatOne:"Build · Ship · Improve",floatTwo:"AI-assisted engineering",
+        aboutKicker:"A little introduction",aboutTitle:"Engineering with curiosity.",
+        aboutSub:"I enjoy moving between technologies, solving practical problems, and owning the result from first idea to final deployment.",
+        aboutP1:"I'm a <strong>Full-Stack Developer</strong> focused on building practical, maintainable web applications. I work across the application lifecycle: backend logic, database design, APIs, frontend experiences, integrations, automation, and deployment.",
+        aboutP2:"<strong>AI is a core part of my development workflow.</strong> I use AI coding assistants and agentic tools to explore unfamiliar technologies, work across different frameworks, prototype faster, debug, and iterate. I stay responsible for architecture decisions, understanding the code, reviewing generated changes, testing, and the final result.",
+        aboutP3:"I prefer choosing the right tools for each problem instead of forcing every project into the same stack.",
+        focusTitle1:"End-to-end development",focusText1:"From database models and APIs to user-facing interfaces.",
+        focusTitle2:"AI-assisted engineering",focusText2:"Agentic workflows, code review, debugging, and faster iteration.",
+        focusTitle3:"Automation & integrations",focusText3:"Connecting services and removing repetitive work.",
+        focusTitle4:"Continuous learning",focusText4:"Exploring frameworks and technologies as problems demand.",
+        stackKicker:"Tools of the trade",stackTitle:"Tech stack & toolkit.",
+        stackSub:"A flexible toolkit for building, integrating, shipping, and maintaining software.",
+        stackBackend:"Backend & Languages",stackFrontend:"Frontend & Interface",stackInfra:"Data, Infrastructure & Tools",
+        stackNote:"Also working with REST APIs, WebSockets, automation, and AI-assisted development workflows.",
+        projectsKicker:"Selected work",projectsTitle:"Things I've built.",
+        projectsSub:"A few projects that reflect the range of problems and technologies I enjoy working with.",
+        projectDesc1:"A real-time watch-party app that synchronizes video playback between participants, with a Node.js and WebSocket server and a Cloudflare Workers implementation.",
+        projectDesc2:"A Laravel 12 dashboard for managing SMS activity across multiple websites, with message reports, cost tracking, dashboards, and extensible provider integration.",
+        projectDesc3:"An experimental Windows/Python utility for merging encrypted Chrome login records between local profiles, with dry-run mode, conflict reporting, and SQLite backups.",
+        projectDesc4:"A Python data collection and machine-learning project that prepares car listing data and trains a model to estimate vehicle prices.",
+        statsKicker:"Open source footprint",statsTitle:"GitHub activity.",
+        statsSub:"A live snapshot of my public GitHub activity and the languages used across my repositories.",
+        metricRepos:"Public repositories",metricReposSmall:"Available projects",
+        metricFollowers:"Followers",metricFollowersSmall:"GitHub community",
+        metricStars:"Repository stars",metricStarsSmall:"Across public repos",
+        metricCommits:"Recent push commits",metricCommitsSmall:"From recent public events",
+        activityPeriod:"Last 30 days",activityTitle:"Public GitHub activity",activityLegend:"Events",
+        languageKicker:"Code distribution",languageTitle:"Top languages",
+        statsFootnote:"Data comes directly from GitHub's public API. The activity chart uses recent public events, not private contribution data.",
+        contactKicker:"Have an interesting challenge?",contactTitle:"Let's build something useful.",
+        contactText:"I'm always interested in thoughtful products, challenging technical problems, and opportunities to create meaningful software.",
+        contactGithub:"Connect on GitHub",contactRepos:"All repositories",
+        footerText:"© <span id=\"year\"></span> Naser Moghbel. Built with curiosity and a little caffeine.",
+        backTop:"Back to top",menuOpen:"Open navigation menu",menuClose:"Close navigation menu",
+        loading:"Loading public GitHub data…",live:"Live data loaded from GitHub · refreshed every 15 minutes",
+        preparingChart:"Preparing activity chart…",loadingLanguages:"Loading repository languages…",
+        noLanguages:"No public language data available yet.",
+        chartUnavailable:"Activity chart unavailable",languagesUnavailable:"Language data unavailable",
+        apiRate:"GitHub API rate limit reached. Please refresh later.",
+        apiError:"GitHub API request failed.",
+        loadError:"Live GitHub data could not be loaded:",viewGithub:"View GitHub profile",
+        eventsAria:"Public GitHub events during the last 30 days"
+      }
+    };
+
+    function applyLanguage(lang) {
+      currentLang = lang === "fa" ? "fa" : "en";
+      const isFa = currentLang === "fa";
+      const t = translations[currentLang];
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = isFa ? "rtl" : "ltr";
+      document.title = isFa ? "ناصر مقبل — توسعه‌دهنده فول‌استک" : "Naser Moghbel — Full-Stack Developer";
+      document.querySelector('meta[name="description"]').content = isFa
+        ? "ناصر مقبل، توسعه‌دهنده فول‌استک؛ ساخت اپلیکیشن‌های وب مدرن با کمک هوش مصنوعی، سیستم‌های بک‌اند، رابط کاربری، API و خودکارسازی."
+        : "Naser Moghbel — Full-Stack Developer building modern web applications with AI-assisted engineering, backend systems, frontend experiences, APIs and automation.";
+      document.querySelector('meta[property="og:title"]').content = document.title;
+      document.querySelector('meta[property="og:description"]').content = t.heroLead.replace(/<[^>]*>/g,"");
+      const put = (selector,key,html) => {
+        const el = document.querySelector(selector);
+        if (el) el[html ? "innerHTML" : "textContent"] = t[key];
+      };
+      const map = [
+        [".nav-links a[href='#about']","navAbout"],[".nav-links a[href='#stack']","navStack"],
+        [".nav-links a[href='#projects']","navProjects"],[".nav-links a[href='#stats']","navGithub"],
+        [".eyebrow","heroEyebrow"],[".hero-copy h1","heroTitle",true],[".hero-lead","heroLead",true],
+        [".hero-actions .btn-primary","heroPrimary"],[".hero-actions .btn-secondary","heroSecondary"],
+        [".quick-facts span:nth-child(1)","factOne"],[".quick-facts span:nth-child(2)","factTwo"],[".quick-facts span:nth-child(3)","factThree"],
+        [".float-one span:last-child","floatOne"],[".float-two span:last-child","floatTwo"],
+        ["#about .section-kicker","aboutKicker"],["#about h2","aboutTitle"],["#about .section-sub","aboutSub"],
+        ["#about .about-copy p:nth-child(1)","aboutP1",true],["#about .about-copy p:nth-child(2)","aboutP2",true],["#about .about-copy p:nth-child(3)","aboutP3"],
+        ["#about .focus-item:nth-child(1) h3","focusTitle1"],["#about .focus-item:nth-child(1) p","focusText1"],
+        ["#about .focus-item:nth-child(2) h3","focusTitle2"],["#about .focus-item:nth-child(2) p","focusText2"],
+        ["#about .focus-item:nth-child(3) h3","focusTitle3"],["#about .focus-item:nth-child(3) p","focusText3"],
+        ["#about .focus-item:nth-child(4) h3","focusTitle4"],["#about .focus-item:nth-child(4) p","focusText4"],
+        ["#stack .section-kicker","stackKicker"],["#stack h2","stackTitle"],["#stack .section-sub","stackSub"],
+        ["#stack .stack-group:nth-child(1) .stack-title","stackBackend"],["#stack .stack-group:nth-child(2) .stack-title","stackFrontend"],
+        ["#stack .stack-group:nth-child(3) .stack-title","stackInfra"],["#stack .stack-note","stackNote"],
+        ["#projects .section-kicker","projectsKicker"],["#projects h2","projectsTitle"],["#projects .section-sub","projectsSub"],
+        ["#projects .project-card:nth-child(1) p","projectDesc1"],["#projects .project-card:nth-child(2) p","projectDesc2"],
+        ["#projects .project-card:nth-child(3) p","projectDesc3"],["#projects .project-card:nth-child(4) p","projectDesc4"],
+        ["#stats .section-kicker","statsKicker"],["#stats .section-head h2","statsTitle"],["#stats .section-sub","statsSub"],
+        [".metric-card:nth-child(1) span","metricRepos"],[".metric-card:nth-child(1) small","metricReposSmall"],
+        [".metric-card:nth-child(2) span","metricFollowers"],[".metric-card:nth-child(2) small","metricFollowersSmall"],
+        [".metric-card:nth-child(3) span","metricStars"],[".metric-card:nth-child(3) small","metricStarsSmall"],
+        [".metric-card:nth-child(4) span","metricCommits"],[".metric-card:nth-child(4) small","metricCommitsSmall"],
+        ["#stats .activity-chart-card:nth-child(1) .section-kicker","activityPeriod"],
+        ["#stats .activity-chart-card:nth-child(1) h3","activityTitle"],["#stats .chart-legend","activityLegend"],
+        ["#stats .activity-chart-card:nth-child(2) .section-kicker","languageKicker"],
+        ["#stats .activity-chart-card:nth-child(2) h3","languageTitle"],["#activityFootnote","statsFootnote"],
+        ["#contact .section-kicker","contactKicker"],["#contact h2","contactTitle"],["#contact .contact-copy p","contactText"],
+        ["#contact .btn-primary","contactGithub"],["#contact .btn-secondary","contactRepos"],
+        [".footer-inner > span","footerText",true],[".footer-links a:first-child","backTop"]
+      ];
+      map.forEach(item => put(item[0],item[1],!!item[2]));
+      const toggle = document.getElementById("languageToggle");
+      toggle.textContent = isFa ? "English" : "فارسی";
+      toggle.setAttribute("aria-label",isFa ? "Switch to English" : "تغییر زبان به فارسی");
+      toggle.setAttribute("aria-pressed",String(isFa));
+      menuToggle.setAttribute("aria-label",navLinks.classList.contains("open") ? t.menuClose : t.menuOpen);
+      const cta = document.querySelector(".nav-cta");
+      if (cta) cta.innerHTML = '<span>'+t.navContact+'</span> <span aria-hidden="true">↗</span>';
+      const status = document.getElementById("activityStatus");
+      if (status && status.querySelector(".loading-dot")) status.innerHTML = '<span class="loading-dot"></span> '+t.loading;
+      if (window.refreshGithubActivityLanguage) window.refreshGithubActivityLanguage();
+      try { localStorage.setItem("naserme-language",currentLang); } catch (_) {}
+    }
+    document.getElementById("languageToggle").addEventListener("click",function() {
+      applyLanguage(currentLang === "en" ? "fa" : "en");
+    });
+    let preferredLanguage = "en";
+    try { preferredLanguage = localStorage.getItem("naserme-language") || "en"; } catch (_) {}
+    applyLanguage(preferredLanguage);
 
     // Render GitHub activity locally from the public GitHub REST API.
     // This avoids relying on third-party SVG card generators.
