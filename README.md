@@ -10,7 +10,7 @@
   <a href="https://github.com/naserme?tab=followers"><img src="https://img.shields.io/github/followers/naserme?style=for-the-badge&logo=github&label=Followers&color=2563EB" alt="GitHub followers" /></a>
   <a href="https://github.com/naserme?tab=repositories"><img src="https://img.shields.io/badge/Public%20Repos-Explore-0F766E?style=for-the-badge&logo=github" alt="Explore repositories" /></a>
   <img src="https://komarev.com/ghpvc/?username=naserme&style=for-the-badge&color=7C3AED&label=PROFILE+VIEWS" alt="Profile views" />
-  <a href="https://naserme.github.io/"><img src="https://img.shields.io/badge/Portfolio-Visit%20Website-0EA5E9?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Visit portfolio website" /></a>
+  <a href="https://naserme.github.io/naserme/"><img src="https://img.shields.io/badge/Portfolio-Visit%20Website-0EA5E9?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Visit portfolio website" /></a>
 </p>
 
 ---
