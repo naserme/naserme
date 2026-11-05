@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d19">
+  <meta name="description" content="Naser Moghbel — Full-Stack Developer building modern web applications with AI-assisted engineering, backend systems, frontend experiences, APIs and automation.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Naser Moghbel | Full-Stack Developer">
+  <meta property="og:description" content="Building end-to-end products with code, curiosity and AI-assisted engineering.">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/59014825?v=4">
+  <meta name="twitter:card" content="summary">
+  <title>Naser Moghbel — Full-Stack Developer</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23080d19'/%3E%3Ctext x='50' y='66' font-size='56' text-anchor='middle' fill='%2338bdf8' font-family='Arial' font-weight='700'%3EN%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080d19;
+      --bg-soft: #0d1526;
+      --panel: rgba(17, 27, 47, .72);
+      --panel-strong: #111b2f;
+      --line: rgba(148, 163, 184, .15);
+      --text: #edf5ff;
+      --muted: #9aaac2;
+      --cyan: #38bdf8;
+      --teal: #2dd4bf;
+      --violet: #a78bfa;
+      --blue: #60a5fa;
+      --radius: 22px;
+      --max: 1160px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, .28);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 15% 4%, rgba(14, 116, 144, .17), transparent 35rem),
+        radial-gradient(ellipse at 90% 18%, rgba(109, 40, 217, .16), transparent 34rem),
+        var(--bg);
+      font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: .18;
+      background-image: linear-gradient(rgba(148,163,184,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.08) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    img { max-width: 100%; }
+    .container { width: min(var(--max), calc(100% - 44px)); margin: 0 auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      border-bottom: 1px solid rgba(148,163,184,.1);
+      background: rgba(8,13,25,.76);
+      backdrop-filter: blur(18px);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 76px; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: -.04em; }
+    .brand-mark {
+      display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px;
+      color: #06111c; font-weight: 700; font-size: 19px;
+      background: linear-gradient(135deg, var(--cyan), var(--teal));
+      box-shadow: 0 0 28px rgba(56,189,248,.25);
+    }
+    .brand span:last-child { font-size: 17px; }
+    .nav-links { display: flex; align-items: center; gap: 27px; color: #b6c4d8; font-size: 13px; font-weight: 600; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 9px; padding: 10px 15px; border-radius: 12px;
+      border: 1px solid rgba(56,189,248,.3); color: #c8f1ff; background: rgba(14,165,233,.08);
+      font-size: 13px; font-weight: 700; transition: .2s ease;
+    }
+    .nav-cta:hover { transform: translateY(-2px); background: rgba(14,165,233,.15); border-color: rgba(56,189,248,.6); }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: var(--panel); color: var(--text); border-radius: 11px; width: 42px; height: 42px; cursor: pointer; }
+    .hero { position: relative; padding: 100px 0 86px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr); align-items: center; gap: 62px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; padding: 8px 13px; border-radius: 999px;
+      color: #b7edff; background: rgba(14,165,233,.09); border: 1px solid rgba(56,189,248,.22);
+      font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    }
+    .pulse { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #2dd4bf; box-shadow: 0 0 0 5px rgba(45,212,191,.12); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin: 24px 0 18px; font: 700 clamp(44px, 6.5vw, 76px)/1.04 "Space Grotesk", sans-serif; letter-spacing: -.065em; }
+    .gradient-text { color: transparent; background: linear-gradient(100deg, #e7f8ff 0%, #67d9ff 42%, #a78bfa 100%); -webkit-background-clip: text; background-clip: text; }
+    .hero-lead { max-width: 680px; color: #b5c4d8; font-size: clamp(16px, 1.65vw, 19px); line-height: 1.85; }
+    .hero-lead strong { color: #edf8ff; font-weight: 700; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 13px; margin-top: 31px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 18px; border-radius: 13px; border: 1px solid transparent; font-size: 14px; font-weight: 700; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { color: #06111c; background: linear-gradient(100deg, #38bdf8, #5eead4); box-shadow: 0 10px 32px rgba(14,165,233,.18); }
+    .btn-primary:hover { box-shadow: 0 14px 38px rgba(14,165,233,.3); }
+    .btn-secondary { color: #d8e8fa; border-color: var(--line); background: rgba(15,23,42,.58); }
+    .btn-secondary:hover { border-color: rgba(56,189,248,.4); }
+    .quick-facts { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 35px; color: #91a3bd; font-size: 12px; }
+    .quick-facts span { display: inline-flex; align-items: center; gap: 8px; }
+    .quick-facts b { color: #e1f4ff; font-weight: 600; }
+    .hero-visual { position: relative; display: grid; place-items: center; min-height: 385px; }
+    .orbit {
+      position: absolute; width: 340px; height: 340px; border: 1px solid rgba(56,189,248,.2); border-radius: 50%;
+      box-shadow: inset 0 0 80px rgba(56,189,248,.035), 0 0 80px rgba(56,189,248,.05);
+      animation: orbit 24s linear infinite;
+    }
+    .orbit::before, .orbit::after { content: ""; position: absolute; border: 1px dashed rgba(167,139,250,.22); border-radius: 50%; inset: 26px; }
+    .orbit::after { inset: 61px; border-style: solid; border-color: rgba(45,212,191,.18); }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+    .avatar-wrap { position: relative; padding: 9px; border-radius: 34px; background: linear-gradient(135deg, rgba(56,189,248,.85), rgba(167,139,250,.7), rgba(45,212,191,.8)); box-shadow: 0 24px 90px rgba(14,165,233,.18); transform: rotate(3deg); }
+    .avatar { display: block; width: 205px; height: 205px; object-fit: cover; border-radius: 27px; border: 4px solid #101a2b; }
+    .float-card {
+      position: absolute; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 15px;
+      border: 1px solid rgba(148,163,184,.19); background: rgba(12,21,38,.86); backdrop-filter: blur(16px);
+      color: #d9e9fa; font-size: 12px; font-weight: 700; box-shadow: var(--shadow); animation: bob 5s ease-in-out infinite;
+    }
+    .float-card .mini-icon { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 10px; background: rgba(56,189,248,.12); color: var(--cyan); font-size: 16px; }
+    .float-one { top: 36px; left: -4px; }
+    .float-two { right: -2px; bottom: 42px; animation-delay: -2.5s; }
+    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .section { padding: 82px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 33px; }
+    .section-kicker { color: var(--cyan); font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 8px; }
+    h2 { margin-bottom: 0; font: 700 clamp(29px, 4vw, 42px)/1.15 "Space Grotesk", sans-serif; letter-spacing: -.045em; }
+    .section-sub { max-width: 475px; color: var(--muted); font-size: 14px; margin-bottom: 2px; }
+    .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 22px; }
+    .glass-card { border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(19,32,55,.82), rgba(11,19,34,.76)); box-shadow: var(--shadow); }
+    .about-copy { padding: 31px; }
+    .about-copy p { color: #aebed2; font-size: 15px; line-height: 1.9; margin-bottom: 15px; }
+    .about-copy p:last-child { margin-bottom: 0; }
+    .about-copy strong { color: #e5f5ff; }
+    .focus-list { padding: 15px; display: grid; gap: 10px; }
+    .focus-item { display: flex; align-items: flex-start; gap: 14px; padding: 15px; border-radius: 15px; background: rgba(148,163,184,.045); }
+    .focus-icon { display: grid; place-items: center; flex: 0 0 38px; height: 38px; border-radius: 12px; color: var(--cyan); background: rgba(56,189,248,.1); font-size: 17px; }
+    .focus-item h3 { font-size: 14px; margin: 0 0 3px; }
+    .focus-item p { color: var(--muted); font-size: 12px; margin: 0; }
+    .stack-panel { padding: 30px; }
+    .stack-group + .stack-group { margin-top: 28px; padding-top: 25px; border-top: 1px solid var(--line); }
+    .stack-title { color: #dcecff; font: 600 15px "Space Grotesk", sans-serif; margin-bottom: 17px; }
+    .stack-icons { display: flex; flex-wrap: wrap; gap: 13px; }
+    .stack-icons img { width: 43px; height: 43px; padding: 8px; border-radius: 13px; background: rgba(148,163,184,.07); border: 1px solid rgba(148,163,184,.1); transition: transform .2s ease, background .2s ease; }
+    .stack-icons img:hover { transform: translateY(-5px); background: rgba(56,189,248,.12); }
+    .stack-note { color: var(--muted); font-size: 13px; margin: 20px 0 0; }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+    .project-card { position: relative; display: flex; flex-direction: column; min-height: 260px; padding: 25px; overflow: hidden; transition: transform .25s ease, border-color .25s ease; }
+    .project-card::after { content: ""; position: absolute; width: 180px; height: 180px; top: -110px; right: -90px; border-radius: 50%; background: var(--glow, rgba(56,189,248,.16)); filter: blur(3px); transition: transform .35s ease; }
+    .project-card:hover { transform: translateY(-6px); border-color: rgba(56,189,248,.36); }
+    .project-card:hover::after { transform: scale(1.5); }
+    .project-top { display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; z-index: 1; }
+    .project-symbol { display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid rgba(56,189,248,.18); border-radius: 14px; background: rgba(56,189,248,.09); color: var(--cyan); font-size: 20px; }
+    .project-link { color: #8ea3bd; font-size: 18px; transition: color .2s ease, transform .2s ease; }
+    .project-link:hover { color: var(--cyan); transform: translate(2px,-2px); }
+    .project-card h3 { position: relative; z-index: 1; margin: 22px 0 8px; font: 700 20px "Space Grotesk", sans-serif; letter-spacing: -.03em; }
+    .project-card p { position: relative; z-index: 1; color: var(--muted); font-size: 13px; line-height: 1.8; margin-bottom: 20px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; position: relative; z-index: 1; }
+    .tag { padding: 5px 9px; border: 1px solid rgba(148,163,184,.14); border-radius: 999px; background: rgba(148,163,184,.055); color: #b8c9df; font-size: 10px; font-weight: 700; }
+    .project-card:nth-child(2) { --glow: rgba(167,139,250,.18); }
+    .project-card:nth-child(2) .project-symbol { color: var(--violet); border-color: rgba(167,139,250,.2); background: rgba(167,139,250,.1); }
+    .project-card:nth-child(3) { --glow: rgba(45,212,191,.17); }
+    .project-card:nth-child(3) .project-symbol { color: var(--teal); border-color: rgba(45,212,191,.2); background: rgba(45,212,191,.1); }
+    .project-card:nth-child(4) { --glow: rgba(96,165,250,.18); }
+    .project-card:nth-child(4) .project-symbol { color: var(--blue); border-color: rgba(96,165,250,.2); background: rgba(96,165,250,.1); }
+    .github-panel { padding: 26px; }
+    .github-stats { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 16px; }
+    .github-stats img { display: block; width: 100%; min-width: 0; border-radius: 12px; }
+    .github-wide { margin-top: 18px; }
+    .github-wide img { display: block; width: 100%; border-radius: 12px; }
+    .stats-note { color: #7f91aa; font-size: 11px; margin: 17px 2px 0; }
+    .contact-card { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 34px; overflow: hidden; }
+    .contact-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 88% 25%, rgba(56,189,248,.16), transparent 28rem); }
+    .contact-copy, .contact-actions { position: relative; z-index: 1; }
+    .contact-copy h2 { margin-bottom: 12px; }
+    .contact-copy p { max-width: 570px; color: var(--muted); margin: 0; font-size: 14px; }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    footer { padding: 27px 0 35px; border-top: 1px solid rgba(148,163,184,.1); color: #71839d; font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a:hover { color: var(--cyan); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 860px) {
+      .hero { padding: 74px 0 55px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 20px; }
+      .hero-visual { min-height: 330px; order: -1; }
+      .hero-copy { text-align: center; }
+      .hero-copy .eyebrow { margin: 0 auto; }
+      .hero-lead { margin-left: auto; margin-right: auto; }
+      .hero-actions, .quick-facts { justify-content: center; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-card { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 680px) {
+      .container { width: min(100% - 30px, var(--max)); }
+      .nav { min-height: 66px; }
+      .menu-toggle { display: inline-grid; place-items: center; }
+      .nav-links { display: none; position: absolute; left: 15px; right: 15px; top: 72px; padding: 15px; border-radius: 16px; border: 1px solid var(--line); background: rgba(10,17,31,.97); box-shadow: var(--shadow); flex-direction: column; align-items: stretch; gap: 0; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 10px; }
+      .nav-cta { justify-content: center; margin-top: 7px; }
+      .hero { padding-top: 55px; }
+      h1 { font-size: clamp(43px, 13vw, 62px); }
+      .hero-visual { min-height: 290px; }
+      .orbit { width: 270px; height: 270px; }
+      .avatar { width: 160px; height: 160px; }
+      .float-card { padding: 9px 10px; font-size: 10px; }
+      .float-one { top: 17px; left: -2px; }
+      .float-two { right: -2px; bottom: 20px; }
+      .section { padding: 60px 0; }
+      .section-head { display: block; }
+      .section-sub { margin-top: 12px; }
+      .about-copy, .stack-panel, .contact-card { padding: 22px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card { min-height: 235px; }
+      .github-panel { padding: 14px; }
+      .github-stats { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .contact-actions { width: 100%; }
+      .contact-actions .btn { flex: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Naser Moghbel home">
+        <span class="brand-mark">N</span><span>naserme<span style="color:var(--cyan)">.</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#stack">Tech Stack</a>
+        <a href="#projects">Projects</a>
+        <a href="#stats">GitHub</a>
+        <a class="nav-cta" href="#contact">Let's connect <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="pulse"></span> Full-Stack Developer · AI-Assisted Engineering</div>
+          <h1>Turning ideas into <span class="gradient-text">real products.</span></h1>
+          <p class="hero-lead">
+            I'm <strong>Naser Moghbel</strong> — a developer building across the full stack.
+            From backend systems and APIs to polished interfaces, automation, and deployment,
+            I use modern tools and AI-assisted workflows to turn ambitious ideas into working software.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Explore my work <span aria-hidden="true">↘</span></a>
+            <a class="btn btn-secondary" href="https://github.com/naserme" target="_blank" rel="noreferrer">Visit GitHub <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="quick-facts">
+            <span><b>01</b> Full-stack mindset</span>
+            <span><b>02</b> AI-powered workflow</span>
+            <span><b>03</b> Always learning</span>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Profile portrait">
+          <div class="orbit"></div>
+          <div class="avatar-wrap">
+            <img class="avatar" src="https://avatars.githubusercontent.com/u/59014825?v=4" alt="Naser Moghbel GitHub avatar" width="205" height="205">
+          </div>
+          <div class="float-card float-one"><span class="mini-icon">⌘</span><span>Build · Ship · Improve</span></div>
+          <div class="float-card float-two"><span class="mini-icon">✦</span><span>AI-assisted engineering</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="section-kicker">A little introduction</div><h2>Engineering with curiosity.</h2></div>
+          <p class="section-sub">I enjoy moving between technologies, solving practical problems, and owning the result from first idea to final deployment.</p>
+        </div>
+        <div class="about-grid">
+          <article class="glass-card about-copy reveal">
+            <p>I'm a <strong>Full-Stack Developer</strong> focused on building practical, maintainable web applications. I work across the application lifecycle: backend logic, database design, APIs, frontend experiences, integrations, automation, and deployment.</p>
+            <p><strong>AI is a core part of my development workflow.</strong> I use AI coding assistants and agentic tools to explore unfamiliar technologies, work across different frameworks, prototype faster, debug, and iterate. I stay responsible for architecture decisions, understanding the code, reviewing generated changes, testing, and the final result.</p>
+            <p>I prefer choosing the right tools for each problem instead of forcing every project into the same stack.</p>
+          </article>
+          <div class="glass-card focus-list reveal">
+            <div class="focus-item"><span class="focus-icon">⚡</span><div><h3>End-to-end development</h3><p>From database models and APIs to user-facing interfaces.</p></div></div>
+            <div class="focus-item"><span class="focus-icon">✦</span><div><h3>AI-assisted engineering</h3><p>Agentic workflows, code review, debugging, and faster iteration.</p></div></div>
+            <div class="focus-item"><span class="focus-icon">⌘</span><div><h3>Automation & integrations</h3><p>Connecting services and removing repetitive work.</p></div></div>
+            <div class="focus-item"><span class="focus-icon">◎</span><div><h3>Continuous learning</h3><p>Exploring frameworks and technologies as problems demand.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stack">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="section-kicker">Tools of the trade</div><h2>Tech stack & toolkit.</h2></div>
+          <p class="section-sub">A flexible toolkit for building, integrating, shipping, and maintaining software.</p>
+        </div>
+        <div class="glass-card stack-panel reveal">
+          <div class="stack-group">
+            <div class="stack-title">Backend & Languages</div>
+            <div class="stack-icons">
+              <img src="https://skillicons.dev/icons?i=php" alt="PHP" title="PHP" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=laravel" alt="Laravel" title="Laravel" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js" title="Node.js" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=python" alt="Python" title="Python" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=js" alt="JavaScript" title="JavaScript" loading="lazy">
+            </div>
+          </div>
+          <div class="stack-group">
+            <div class="stack-title">Frontend & Interface</div>
+            <div class="stack-icons">
+              <img src="https://skillicons.dev/icons?i=vue" alt="Vue.js" title="Vue.js" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=html" alt="HTML" title="HTML" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=css" alt="CSS" title="CSS" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind CSS" title="Tailwind CSS" loading="lazy">
+            </div>
+          </div>
+          <div class="stack-group">
+            <div class="stack-title">Data, Infrastructure & Tools</div>
+            <div class="stack-icons">
+              <img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" title="MySQL" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=sqlite" alt="SQLite" title="SQLite" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=docker" alt="Docker" title="Docker" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=linux" alt="Linux" title="Linux" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=git" alt="Git" title="Git" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=github" alt="GitHub" title="GitHub" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=cloudflare" alt="Cloudflare" title="Cloudflare" loading="lazy">
+              <img src="https://skillicons.dev/icons?i=vscode" alt="Visual Studio Code" title="Visual Studio Code" loading="lazy">
+            </div>
+          </div>
+          <p class="stack-note">Also working with REST APIs, WebSockets, automation, and AI-assisted development workflows.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="section-kicker">Selected work</div><h2>Things I've built.</h2></div>
+          <p class="section-sub">A few projects that reflect the range of problems and technologies I enjoy working with.</p>
+        </div>
+        <div class="projects-grid">
+          <article class="glass-card project-card reveal">
+            <div class="project-top"><span class="project-symbol">◉</span><a class="project-link" href="https://github.com/naserme/watchTogether" target="_blank" rel="noreferrer" aria-label="Open WatchTogether repository">↗</a></div>
+            <h3>WatchTogether</h3>
+            <p>A real-time watch-party app that synchronizes video playback between participants, with a Node.js and WebSocket server and a Cloudflare Workers implementation.</p>
+            <div class="tags"><span class="tag">Node.js</span><span class="tag">WebSockets</span><span class="tag">Cloudflare</span><span class="tag">Real-time</span></div>
+          </article>
+          <article class="glass-card project-card reveal">
+            <div class="project-top"><span class="project-symbol">▦</span><a class="project-link" href="https://github.com/naserme/sms-panel-manager" target="_blank" rel="noreferrer" aria-label="Open SMS Panel Manager repository">↗</a></div>
+            <h3>SMS Panel Manager</h3>
+            <p>A Laravel 12 dashboard for managing SMS activity across multiple websites, with message reports, cost tracking, dashboards, and extensible provider integration.</p>
+            <div class="tags"><span class="tag">Laravel 12</span><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">SMS APIs</span></div>
+          </article>
+          <article class="glass-card project-card reveal">
+            <div class="project-top"><span class="project-symbol">⌘</span><a class="project-link" href="https://github.com/naserme/chrome-password-sync" target="_blank" rel="noreferrer" aria-label="Open Chrome Password Sync repository">↗</a></div>
+            <h3>Chrome Password Sync</h3>
+            <p>An experimental Windows/Python utility for merging encrypted Chrome login records between local profiles, with dry-run mode, conflict reporting, and SQLite backups.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">SQLite</span><span class="tag">PowerShell</span><span class="tag">Windows</span></div>
+          </article>
+          <article class="glass-card project-card reveal">
+            <div class="project-top"><span class="project-symbol">◈</span><a class="project-link" href="https://github.com/naserme/Car-Valuation-Engine" target="_blank" rel="noreferrer" aria-label="Open Car Valuation Engine repository">↗</a></div>
+            <h3>Car Valuation Engine</h3>
+            <p>A Python data collection and machine-learning project that prepares car listing data and trains a model to estimate vehicle prices.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">MySQL</span><span class="tag">Data</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stats">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="section-kicker">Open source footprint</div><h2>GitHub activity.</h2></div>
+          <p class="section-sub">A live snapshot of my public GitHub activity and the languages used across my repositories.</p>
+        </div>
+        <div class="glass-card github-panel reveal">
+          <div class="github-stats">
+            <img src="https://github-readme-stats.vercel.app/api?username=naserme&show_icons=true&theme=tokyonight&hide_border=true&rank_icon=github&include_all_commits=true" alt="GitHub account statistics for naserme" loading="lazy">
+            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=naserme&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" alt="Most used programming languages" loading="lazy">
+          </div>
+          <div class="github-wide">
+            <img src="https://streak-stats.demolab.com?user=naserme&theme=tokyonight&hide_border=true" alt="GitHub contribution streak" loading="lazy">
+          </div>
+          <div class="github-wide">
+            <img src="https://github-readme-activity-graph.vercel.app/graph?username=naserme&theme=tokyo-night&hide_border=true&area=true" alt="GitHub contribution activity graph" loading="lazy">
+          </div>
+          <p class="stats-note">Stats are provided by third-party services and may occasionally be delayed or unavailable.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-card glass-card reveal">
+          <div class="contact-copy">
+            <div class="section-kicker">Have an interesting challenge?</div>
+            <h2>Let's build something useful.</h2>
+            <p>I'm always interested in thoughtful products, challenging technical problems, and opportunities to create meaningful software.</p>
+          </div>
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="https://github.com/naserme" target="_blank" rel="noreferrer">Connect on GitHub ↗</a>
+            <a class="btn btn-secondary" href="https://github.com/naserme?tab=repositories" target="_blank" rel="noreferrer">All repositories ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Naser Moghbel. Built with curiosity and a little caffeine.</span>
+      <div class="footer-links"><a href="#home">Back to top ↑</a><a href="https://github.com/naserme" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    menuToggle.addEventListener("click", function () {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+        menuToggle.textContent = "☰";
+      });
+    });
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(function (element) {
+      revealObserver.observe(element);
+    });
+  </script>
+</body>
+</html>
