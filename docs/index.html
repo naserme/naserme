@@ -518,7 +518,8 @@
           const day = new Date(now);
           day.setHours(0,0,0,0);
           day.setDate(day.getDate() - i);
-          days.push({ key: day.toISOString().slice(0,10), count: 0 });
+          const localKey = day.getFullYear()+"-"+String(day.getMonth()+1).padStart(2,"0")+"-"+String(day.getDate()).padStart(2,"0");
+          days.push({ key: localKey, count: 0 });
         }
         const lookup = new Map(days.map((day,index) => [day.key,index]));
         let pushCommits = 0;
