@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080d19">
-  <meta name="description" content="Naser Moghbel — Full-Stack Developer working with Laravel, PHP, Vue.js, JavaScript, APIs, databases, and web application development.">
+  <meta name="description" content="Naser Moghbel — Full-stack developer focused on PHP, Laravel, production web applications, APIs, payment integrations, and business software.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Naser Moghbel | Full-Stack Developer">
-  <meta property="og:description" content="Full-stack web development with Laravel, Vue.js, APIs, databases, and integrations.">
+  <meta property="og:title" content="Naser Moghbel | Full-stack Developer">
+  <meta property="og:description" content="PHP and Laravel development for production web applications, APIs, integrations, and business systems.">
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/59014825?v=4">
   <meta name="twitter:card" content="summary">
-  <title>Naser Moghbel — Full-Stack Developer</title>
+  <title>Naser Moghbel — Full-stack Developer | PHP & Laravel</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23080d19'/%3E%3Ctext x='50' y='66' font-size='56' text-anchor='middle' fill='%2338bdf8' font-family='Arial' font-weight='700'%3EN%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -163,7 +163,21 @@
     .focus-icon { display: grid; place-items: center; flex: 0 0 38px; height: 38px; border-radius: 12px; color: var(--cyan); background: rgba(56,189,248,.1); font-size: 17px; }
     .focus-item h3 { font-size: 14px; margin: 0 0 3px; }
     .focus-item p { color: var(--muted); font-size: 12px; margin: 0; }
+    .experience-card { padding: 30px; }
+    .experience-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+    .experience-heading h3 { margin: 0 0 5px; color: #edf6ff; font: 700 21px "Space Grotesk",sans-serif; }
+    .experience-domain { color: #9fb2cc; font-size: 13px; margin: 0; }
+    .experience-date { flex: 0 0 auto; padding: 7px 11px; border: 1px solid rgba(56,189,248,.2); border-radius: 999px; color: #b8eaff; background: rgba(56,189,248,.07); font-size: 11px; font-weight: 700; }
+    .experience-intro { margin: 23px 0 0; max-width: 900px; color: #b5c4d8; font-size: 14px; line-height: 1.9; }
+    .experience-highlights { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin-top: 22px; }
+    .experience-item { padding: 18px; border: 1px solid rgba(148,163,184,.12); border-radius: 16px; background: rgba(148,163,184,.045); }
+    .experience-item h4 { margin: 0 0 8px; color: #e5f2ff; font-size: 13px; }
+    .experience-item p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
     .stack-panel { padding: 30px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 9px; }
+    .skill-tag { display: inline-flex; align-items: center; padding: 7px 11px; border: 1px solid rgba(148,163,184,.15); border-radius: 10px; color: #bdcce0; background: rgba(148,163,184,.055); font-size: 12px; font-weight: 600; }
+    .skill-tag-primary { color: #c9f1ff; border-color: rgba(56,189,248,.25); background: rgba(56,189,248,.08); }
+    .skill-tag-muted { color: #8799b2; background: rgba(148,163,184,.025); }
     .stack-group + .stack-group { margin-top: 28px; padding-top: 25px; border-top: 1px solid var(--line); }
     .stack-title { color: #dcecff; font: 600 15px "Space Grotesk", sans-serif; margin-bottom: 17px; }
     .stack-icons { display: flex; flex-wrap: wrap; gap: 13px; }
@@ -246,6 +260,7 @@
       .hero-lead { margin-left: auto; margin-right: auto; }
       .hero-actions, .quick-facts { justify-content: center; }
       .about-grid { grid-template-columns: 1fr; }
+      .experience-highlights { grid-template-columns: 1fr; }
       .contact-card { align-items: flex-start; flex-direction: column; }
       html[dir="rtl"] .hero-copy { text-align: center; }
       html[dir="rtl"] .hero-actions { justify-content: center; }
@@ -272,7 +287,8 @@
       .section { padding: 60px 0; }
       .section-head { display: block; }
       .section-sub { margin-top: 12px; }
-      .about-copy, .stack-panel, .contact-card { padding: 22px; }
+      .about-copy, .stack-panel, .experience-card, .contact-card { padding: 22px; }
+      .experience-heading { flex-direction: column; gap: 11px; }
       .projects-grid { grid-template-columns: 1fr; }
       .project-card { min-height: 235px; }
       .github-panel { padding: 14px; }
@@ -292,6 +308,7 @@
       <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
       <div class="nav-links" id="navLinks">
         <a href="#about" data-i18n="navAbout">About</a>
+        <a href="#experience" data-i18n="navExperience">Experience</a>
         <a href="#stack" data-i18n="navStack">Tech Stack</a>
         <a href="#projects" data-i18n="navProjects">Projects</a>
         <a href="#stats" data-i18n="navGithub">GitHub</a>
@@ -305,19 +322,19 @@
     <section class="hero" id="home">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow"><span class="pulse"></span> Full-Stack Developer · Web Applications</div>
-          <h1>Full-stack development for <span class="gradient-text">web applications.</span></h1>
+          <div class="eyebrow"><span class="pulse"></span> Full-stack Developer · PHP & Laravel</div>
+          <h1>Full-stack development focused on <span class="gradient-text">PHP & Laravel.</span></h1>
           <p class="hero-lead">
-            I'm <strong>Naser Moghbel</strong>, a full-stack developer working mainly with Laravel, PHP, Vue.js and JavaScript. I build backend services and APIs, work with databases and third-party integrations, and implement the interfaces used by end users. I also use Node.js and Python when a project calls for them.
+            I'm <strong>Naser Moghbel</strong>. Most of my hands-on experience is in developing and maintaining web applications with PHP and Laravel. I work on business features, APIs, payment integrations, and internal tools. I try to understand what a request needs to solve before deciding how to implement it.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#projects">View projects <span aria-hidden="true">↘</span></a>
             <a class="btn btn-secondary" href="https://github.com/naserme" target="_blank" rel="noreferrer">GitHub profile <span aria-hidden="true">↗</span></a>
           </div>
           <div class="quick-facts">
-            <span><b>01</b> Backend development</span>
-            <span><b>02</b> Frontend implementation</span>
-            <span><b>03</b> APIs & integrations</span>
+            <span><b>01</b> Production applications</span>
+            <span><b>02</b> Business integrations</span>
+            <span><b>03</b> Problem analysis</span>
           </div>
         </div>
         <div class="hero-visual" aria-label="Profile portrait">
@@ -325,8 +342,8 @@
           <div class="avatar-wrap">
             <img class="avatar" src="https://avatars.githubusercontent.com/u/59014825?v=4" alt="Naser Moghbel GitHub avatar" width="205" height="205">
           </div>
-          <div class="float-card float-one"><span class="mini-icon">⌘</span><span>Laravel · Vue · PHP</span></div>
-          <div class="float-card float-two"><span class="mini-icon">✦</span><span>Laravel · Vue.js</span></div>
+          <div class="float-card float-one"><span class="mini-icon">⌘</span><span>PHP · Laravel · APIs</span></div>
+          <div class="float-card float-two"><span class="mini-icon">✦</span><span>Production systems</span></div>
         </div>
       </div>
     </section>
@@ -334,65 +351,78 @@
     <section class="section" id="about">
       <div class="container">
         <div class="section-head reveal">
-          <div><div class="section-kicker">Profile</div><h2>What I work on</h2></div>
-          <p class="section-sub">I develop and maintain web applications, with a focus on backend functionality and full-stack delivery.</p>
+          <div><div class="section-kicker">Approach</div><h2>How I work</h2></div>
+          <p class="section-sub">I focus on understanding the requirement, making a practical change, and checking how it behaves in the actual product.</p>
         </div>
         <div class="about-grid">
           <article class="glass-card about-copy reveal">
-            <p>My work covers application design and implementation: database structure, business logic, REST APIs, authentication, integrations, frontend components, and deployment. My main backend stack is PHP and Laravel, with Vue.js and JavaScript on the frontend.</p>
-            <p>I also use Node.js and Python for services, scripts, data collection, and automation. I work with relational databases such as MySQL and SQLite, and use Git, Linux, Docker, and Cloudflare tools where they fit the project.</p>
-            <p>I use AI coding assistants when useful, but I review and test code changes before including them in a project.</p>
+            <p>I usually work on existing products: understanding a request, identifying the part of the system it affects, implementing the change, and checking it before release. My work includes business features, APIs, payment integrations, database work, and production troubleshooting.</p>
+            <p>I also build supporting tools when a product needs them. Recent work includes an internal crawler for competitor and market data, and messaging bots connected to a financing platform. My regular tools include PHP, Laravel, Slim, MySQL, SQLite, Redis, Linux, Nginx, Supervisor, and Git.</p>
+            <p>I use AI-assisted development tools as part of my workflow, but I review the changes, run tests, and verify behavior myself before treating the work as complete.</p>
           </article>
           <div class="glass-card focus-list reveal">
-            <div class="focus-item"><span class="focus-icon">⚡</span><div><h3>Backend & API development</h3><p>Laravel applications, business logic, database design, and REST APIs.</p></div></div>
-            <div class="focus-item"><span class="focus-icon">✦</span><div><h3>Frontend implementation</h3><p>Vue.js interfaces, responsive layouts, and API integration.</p></div></div>
-            <div class="focus-item"><span class="focus-icon">⌘</span><div><h3>Integrations & automation</h3><p>Third-party services, messaging APIs, scripts, and crawlers.</p></div></div>
-            <div class="focus-item"><span class="focus-icon">◎</span><div><h3>Deployment & maintenance</h3><p>Linux environments, Docker, server configuration, and troubleshooting.</p></div></div>
+            <div class="focus-item"><span class="focus-icon">⚡</span><div><h3>Product development</h3><p>Extending existing applications and delivering features based on business requirements.</p></div></div>
+            <div class="focus-item"><span class="focus-icon">✦</span><div><h3>Backend & integrations</h3><p>PHP and Laravel services, REST APIs, payment gateways, and external systems.</p></div></div>
+            <div class="focus-item"><span class="focus-icon">⌘</span><div><h3>Problem solving</h3><p>Investigating production issues, tracing causes, and validating fixes.</p></div></div>
+            <div class="focus-item"><span class="focus-icon">◎</span><div><h3>Operations & maintenance</h3><p>Linux servers, Nginx, process managers, deployment, and troubleshooting.</p></div></div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><div class="section-kicker">Experience</div><h2>Recent professional work</h2></div>
+          <p class="section-sub">Development and maintenance work on a live financial product, alongside internal tools built for the team.</p>
+        </div>
+        <article class="glass-card experience-card reveal">
+          <div class="experience-heading">
+            <div><h3>IT Specialist & Full-stack Developer</h3><p class="experience-domain">Financial technology</p></div>
+            <span class="experience-date">Apr 2026 – Present</span>
+          </div>
+          <p class="experience-intro">My current work combines feature development and maintenance for a financing platform with around 9,100 registered users, plus the development of internal tools and messaging integrations.</p>
+          <div class="experience-highlights">
+            <div class="experience-item"><h4>Production platform</h4><p>The platform was already in operation when I joined. My contributions include a customer-loyalty area for the marketing team, payment-gateway management, and smaller product improvements.</p></div>
+            <div class="experience-item"><h4>Competitor research crawler</h4><p>Built an internal crawler from scratch, with guidance from the senior IT lead, to collect data from Farabourse and competitor websites. AI-assisted extraction results are presented in Apache Superset dashboards for a team of around 15.</p></div>
+            <div class="experience-item"><h4>Messaging integrations</h4><p>Developed Telegram and Bale bots for the financing platform's user base.</p></div>
+          </div>
+        </article>
       </div>
     </section>
 
     <section class="section" id="stack">
       <div class="container">
         <div class="section-head reveal">
-          <div><div class="section-kicker">Technologies</div><h2>Technologies I use</h2></div>
-          <p class="section-sub">Languages, frameworks, and tools used across application development, integrations, and automation.</p>
+          <div><div class="section-kicker">Technical skills</div><h2>Tools I work with</h2></div>
+          <p class="section-sub">A practical overview of the languages, frameworks, databases, and tools I have used in projects and day-to-day development.</p>
         </div>
         <div class="glass-card stack-panel reveal">
           <div class="stack-group">
-            <div class="stack-title">Backend & Languages</div>
-            <div class="stack-icons">
-              <img src="https://skillicons.dev/icons?i=php" alt="PHP" title="PHP" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=laravel" alt="Laravel" title="Laravel" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js" title="Node.js" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=python" alt="Python" title="Python" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=js" alt="JavaScript" title="JavaScript" loading="lazy">
+            <div class="stack-title">Backend & APIs</div>
+            <div class="skill-tags">
+              <span class="skill-tag skill-tag-primary">PHP</span><span class="skill-tag skill-tag-primary">Laravel</span><span class="skill-tag skill-tag-primary">Slim</span><span class="skill-tag">REST APIs</span>
             </div>
           </div>
           <div class="stack-group">
-            <div class="stack-title">Frontend & Interface</div>
-            <div class="stack-icons">
-              <img src="https://skillicons.dev/icons?i=vue" alt="Vue.js" title="Vue.js" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=html" alt="HTML" title="HTML" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=css" alt="CSS" title="CSS" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind CSS" title="Tailwind CSS" loading="lazy">
+            <div class="stack-title">Databases & Caching</div>
+            <div class="skill-tags">
+              <span class="skill-tag">MySQL</span><span class="skill-tag">SQLite</span><span class="skill-tag">Redis</span>
             </div>
           </div>
           <div class="stack-group">
-            <div class="stack-title">Data, Infrastructure & Tools</div>
-            <div class="stack-icons">
-              <img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" title="MySQL" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=sqlite" alt="SQLite" title="SQLite" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=docker" alt="Docker" title="Docker" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=linux" alt="Linux" title="Linux" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=git" alt="Git" title="Git" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=github" alt="GitHub" title="GitHub" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=cloudflare" alt="Cloudflare" title="Cloudflare" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=vscode" alt="Visual Studio Code" title="Visual Studio Code" loading="lazy">
+            <div class="stack-title">Infrastructure & Tooling</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Linux</span><span class="skill-tag">Nginx</span><span class="skill-tag">Supervisor</span><span class="skill-tag">PM2</span><span class="skill-tag">Git</span><span class="skill-tag skill-tag-muted">Docker · basic</span>
             </div>
           </div>
-          <p class="stack-note">Other areas include REST APIs, WebSockets, service integrations, and automation.</p>
+          <div class="stack-group">
+            <div class="stack-title">Additional experience</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Python · personal projects</span><span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span class="skill-tag skill-tag-muted">JavaScript · limited</span><span class="skill-tag skill-tag-muted">Vue.js · limited</span><span class="skill-tag skill-tag-muted">Node.js · limited</span>
+            </div>
+          </div>
+          <p class="stack-note">These labels reflect hands-on experience, not certifications or claimed expertise in every tool.</p>
         </div>
       </div>
     </section>
@@ -470,7 +500,7 @@
           <div class="contact-copy">
             <div class="section-kicker">Contact</div>
             <h2>Get in touch</h2>
-            <p>For project discussions, technical questions, or professional collaboration, you can reach me through GitHub.</p>
+            <p>For professional enquiries or a discussion about a project, the easiest way to reach me is through GitHub.</p>
           </div>
           <div class="contact-actions">
             <a class="btn btn-primary" href="https://github.com/naserme" target="_blank" rel="noreferrer">GitHub profile ↗</a>
@@ -483,7 +513,7 @@
 
   <footer>
     <div class="container footer-inner">
-      <span>© <span id="year"></span> Naser Moghbel. Full-stack developer · Web applications</span>
+      <span>© <span id="year"></span> Naser Moghbel. Full-stack developer · PHP & Laravel</span>
       <div class="footer-links"><a href="#home">Back to top ↑</a><a href="https://github.com/naserme" target="_blank" rel="noreferrer">GitHub ↗</a></div>
     </div>
   </footer>
@@ -524,27 +554,35 @@
     const translations = {
       fa: {
         navAbout:"درباره من",navStack:"مهارت‌ها",navProjects:"پروژه‌ها",navGithub:"گیت‌هاب",navContact:"ارتباط با من",
-        heroEyebrow:"<span class=\"pulse\"></span> توسعه‌دهنده فول‌استک · اپلیکیشن‌های وب",
-        heroTitle:"توسعه فول‌استک برای <span class=\"gradient-text\">اپلیکیشن‌های وب</span>",
-        heroLead:"من <strong>ناصر مقبل</strong> هستم و به‌صورت فول‌استک روی توسعه اپلیکیشن‌های وب کار می‌کنم. تمرکز اصلی من PHP و Laravel در بک‌اند و Vue.js و JavaScript در فرانت‌اند است؛ از طراحی دیتابیس و پیاده‌سازی API تا اتصال سرویس‌ها و توسعه رابط کاربری.",
+        heroEyebrow:"<span class=\"pulse\"></span> توسعه‌دهنده فول‌استک · PHP و Laravel",
+        heroTitle:"توسعه فول‌استک با تمرکز بر <span class=\"gradient-text\">PHP و Laravel</span>",
+        heroLead:"من <strong>ناصر مقبل</strong> هستم. بیشتر تجربه عملی من در توسعه و نگهداری اپلیکیشن‌های وب با PHP و Laravel است؛ از پیاده‌سازی قابلیت‌های کسب‌وکار و API گرفته تا اتصال درگاه‌های پرداخت و ساخت ابزارهای داخلی. پیش از انتخاب راهکار، سعی می‌کنم بفهمم هر درخواست قرار است چه مسئله‌ای را حل کند.",
         heroPrimary:"دیدن پروژه‌ها ↘",heroSecondary:"پروفایل گیت‌هاب ↗",
-        factOne:"<b>01</b> توسعه بک‌اند",factTwo:"<b>02</b> پیاده‌سازی فرانت‌اند",factThree:"<b>03</b> API و یکپارچه‌سازی",
-        floatOne:"Laravel · Vue · PHP",floatTwo:"بک‌اند و فرانت‌اند",
-        aboutKicker:"معرفی",aboutTitle:"حوزه‌های کاری من",
-        aboutSub:"اپلیکیشن‌های وب را با تمرکز بر منطق بک‌اند و پیاده‌سازی کامل قابلیت‌ها توسعه می‌دهم و نگهداری می‌کنم.",
-        aboutP1:"بخش اصلی کار من طراحی و پیاده‌سازی قابلیت‌های یک اپلیکیشن است: ساختار دیتابیس، منطق کسب‌وکار، REST API، احراز هویت، اتصال سرویس‌ها و توسعه رابط کاربری. در بک‌اند بیشتر با PHP و Laravel و در فرانت‌اند با Vue.js و JavaScript کار می‌کنم.",
-        aboutP2:"برای توسعه ابزارهای جانبی، اسکریپت‌ها، جمع‌آوری داده و خودکارسازی نیز از Node.js و Python استفاده می‌کنم. در پروژه‌ها با MySQL و SQLite کار داشته‌ام و بسته به نیاز از Git، Linux، Docker و ابزارهای Cloudflare استفاده می‌کنم.",
-        aboutP3:"در صورت نیاز از دستیارهای کدنویسی مبتنی بر هوش مصنوعی استفاده می‌کنم، اما کد تولیدشده را پیش از استفاده بررسی و تست می‌کنم.",
-        focusTitle1:"توسعه بک‌اند و API",focusText1:"توسعه با Laravel، منطق کسب‌وکار، طراحی دیتابیس و REST API.",
-        focusTitle2:"پیاده‌سازی فرانت‌اند",focusText2:"پیاده‌سازی رابط با Vue.js، صفحات واکنش‌گرا و اتصال به API.",
-        focusTitle3:"یکپارچه‌سازی و خودکارسازی",focusText3:"اتصال سرویس‌های ثالث، پنل‌های پیامکی، اسکریپت‌ها و خزنده‌ها.",
-        focusTitle4:"استقرار و نگهداری",focusText4:"محیط Linux، Docker، تنظیم سرور و عیب‌یابی.",
-        stackKicker:"فناوری‌ها",stackTitle:"فناوری‌هایی که استفاده می‌کنم",
-        stackSub:"زبان‌ها، فریم‌ورک‌ها و ابزارهایی که در توسعه اپلیکیشن، یکپارچه‌سازی سرویس‌ها و خودکارسازی استفاده می‌کنم.",
-        stackBackend:"بک‌اند و زبان‌ها",stackFrontend:"فرانت‌اند و رابط کاربری",stackInfra:"داده، زیرساخت و ابزارها",
-        stackNote:"سایر حوزه‌های کاری شامل REST API، وب‌سوکت، اتصال سرویس‌ها و خودکارسازی است.",
+        factOne:"<b>01</b> اپلیکیشن‌های عملیاتی",factTwo:"<b>02</b> اتصال سرویس‌ها",factThree:"<b>03</b> تحلیل و حل مسئله",
+        floatOne:"PHP · Laravel · API",floatTwo:"سیستم‌های عملیاتی",
+        aboutKicker:"رویکرد کاری",aboutTitle:"نحوه کار من",
+        aboutSub:"تلاش می‌کنم نیاز را درست بفهمم، راهکار عملی انتخاب کنم و نتیجه را در محصول واقعی بررسی کنم.",
+        aboutP1:"بخش زیادی از کارم توسعه قابلیت‌های جدید در محصولات موجود است: بررسی درخواست، پیدا کردن بخش مرتبط در سیستم، پیاده‌سازی تغییر و بررسی نتیجه پیش از انتشار. این کارها شامل قابلیت‌های کسب‌وکار، API، اتصال درگاه‌های پرداخت، کار با دیتابیس و عیب‌یابی سامانه‌های عملیاتی می‌شود.",
+        aboutP2:"وقتی محصول به ابزار جانبی نیاز دارد، آن را هم توسعه می‌دهم. از کارهای اخیرم می‌توان به ساخت کرالر داخلی برای جمع‌آوری داده‌های رقبا و ابزارهای پیام‌رسان متصل به سامانه تأمین مالی اشاره کرد. ابزارهای اصلی من PHP، Laravel، Slim، MySQL، SQLite، Redis، Linux، Nginx، Supervisor و Git هستند.",
+        aboutP3:"در روند توسعه از ابزارهای کمک‌برنامه‌نویسی مبتنی بر هوش مصنوعی هم استفاده می‌کنم؛ با این حال، بررسی تغییرات، اجرای تست‌ها و اطمینان از رفتار درست کد را خودم انجام می‌دهم.",
+        focusTitle1:"توسعه محصول",focusText1:"گسترش اپلیکیشن‌های موجود و پیاده‌سازی قابلیت‌ها بر اساس نیاز کسب‌وکار.",
+        focusTitle2:"بک‌اند و یکپارچه‌سازی",focusText2:"سرویس‌های PHP و Laravel، API، درگاه‌های پرداخت و سرویس‌های خارجی.",
+        focusTitle3:"حل مسئله",focusText3:"بررسی خطاهای محیط عملیاتی، ریشه‌یابی مشکل و اطمینان از درستی راه‌حل.",
+        focusTitle4:"عملیات و نگهداری",focusText4:"کار با سرورهای Linux، Nginx، ابزارهای مدیریت پردازش و عیب‌یابی.",
+        navExperience:"تجربه کاری",
+        experienceKicker:"تجربه کاری",experienceTitle:"بخشی از کارهای اخیر",experienceSub:"توسعه و نگهداری یک محصول مالی فعال در کنار ساخت ابزارهای داخلی برای تیم.",
+        experienceRole:"کارشناس IT و توسعه‌دهنده فول‌استک",experienceDomain:"فناوری مالی",experienceDate:"اردیبهشت ۱۴۰۵ تا امروز",
+        experienceIntro:"بخشی از مسئولیت فعلی من توسعه قابلیت‌ها و نگهداری سامانه تأمین مالی با حدود ۹٬۱۰۰ کاربر ثبت‌نام‌شده است؛ در کنار آن ابزارهای داخلی و اتصال‌های پیام‌رسان را توسعه داده‌ام.",
+        experienceItem1Title:"سامانه عملیاتی",experienceItem1:"سامانه پیش از ورود من فعال بود. کارهای من شامل توسعه بخش باشگاه مشتریان برای تیم بازاریابی، مدیریت درگاه‌های پرداخت و بهبودهای کوچک محصول بوده است.",
+        experienceItem2Title:"کرالر تحلیل رقبا",experienceItem2:"این کرالر را از صفر و با راهنمایی مسئول ارشد IT پیاده‌سازی کردم تا داده‌های فرابورس و وب‌سایت رقبا را جمع‌آوری کند. خروجی استخراج داده با کمک هوش مصنوعی در داشبوردهای Apache Superset برای تیمی حدوداً ۱۵ نفره نمایش داده می‌شود.",
+        experienceItem3Title:"اتصال پیام‌رسان‌ها",experienceItem3:"ربات‌های تلگرام و بله را برای کاربران سامانه تأمین مالی توسعه دادم.",
+        stackAdditional:"تجربه‌های مکمل",
+        stackKicker:"مهارت‌های فنی",stackTitle:"ابزارهایی که با آن‌ها کار می‌کنم",
+        stackSub:"مروری بر زبان‌ها، فریم‌ورک‌ها، دیتابیس‌ها و ابزارهایی که در پروژه‌ها و کار روزمره استفاده کرده‌ام.",
+        stackBackend:"بک‌اند و API",stackFrontend:"دیتابیس و کش",stackInfra:"زیرساخت و ابزارها",
+        stackNote:"این دسته‌بندی بر اساس تجربه عملی است و به معنی ادعای تخصص یا داشتن گواهینامه در تمام ابزارها نیست.",
         projectsKicker:"پروژه‌ها",projectsTitle:"پروژه‌های منتخب",
-        projectsSub:"چند مخزن عمومی را انتخاب کرده‌ام تا هدف و جزئیات فنی هر پروژه را به‌اختصار معرفی کنم.",
+        projectsSub:"چند پروژه عمومی که می‌توان کد و جزئیات پیاده‌سازی آن‌ها را در GitHub بررسی کرد.",
         projectDesc1:"اپلیکیشن تماشای گروهی و همگام‌سازی پخش ویدئو بین کاربران. این پروژه یک سرور مبتنی بر Node.js و WebSocket و نسخه‌ای مبتنی بر Cloudflare Workers و Durable Objects دارد.",
         projectDesc2:"داشبوردی با Laravel 12 برای مدیریت ارسال پیامک چند وب‌سایت؛ شامل تاریخچه پیام‌ها، گزارش‌گیری، محاسبه هزینه و ساختار قابل توسعه برای اتصال به پنل‌های پیامکی.",
         projectDesc3:"ابزاری برای ویندوز با Python که رکوردهای رمزنگاری‌شده ورود را بین پروفایل‌های محلی Chrome ادغام می‌کند. حالت Dry Run، گزارش تعارض و بکاپ SQLite دارد؛ پیش از استفاده واقعی باید با پروفایل آزمایشی بررسی شود.",
@@ -559,9 +597,9 @@
         languageKicker:"ترکیب کد",languageTitle:"زبان‌های برتر",
         statsFootnote:"اطلاعات مستقیماً از API عمومی GitHub دریافت می‌شود. نمودار فعالیت، رویدادهای عمومی اخیر را نشان می‌دهد و شامل مشارکت‌های خصوصی نیست.",
         contactKicker:"ارتباط",contactTitle:"راه‌های ارتباطی",
-        contactText:"برای گفت‌وگو درباره پروژه‌ها، پرسش‌های فنی یا همکاری حرفه‌ای می‌توانید از طریق GitHub با من در ارتباط باشید.",
+        contactText:"برای ارتباط کاری یا گفت‌وگو درباره یک پروژه، می‌توانید از طریق GitHub با من در تماس باشید.",
         contactGithub:"پروفایل GitHub ↗",contactRepos:"مشاهده مخازن ↗",
-        footerText:"© <span id=\"year\"></span> ناصر مقبل. توسعه‌دهنده فول‌استک · اپلیکیشن‌های وب",
+        footerText:"© <span id=\"year\"></span> ناصر مقبل. توسعه‌دهنده فول‌استک · PHP و Laravel",
         backTop:"بازگشت به بالا",menuOpen:"باز کردن منو",menuClose:"بستن منو",
         loading:"در حال دریافت اطلاعات عمومی GitHub…",live:"اطلاعات زنده از GitHub دریافت شد · به‌روزرسانی هر ۱۵ دقیقه",
         preparingChart:"در حال آماده‌سازی نمودار فعالیت…",loadingLanguages:"در حال دریافت زبان‌های مخازن…",
@@ -574,27 +612,35 @@
       },
       en: {
         navAbout:"About",navStack:"Tech Stack",navProjects:"Projects",navGithub:"GitHub",navContact:"Let's connect",
-        heroEyebrow:"<span class=\"pulse\"></span> Full-Stack Developer · Web Applications",
-        heroTitle:"Full-stack development for <span class=\"gradient-text\">web applications</span>",
-        heroLead:"I'm <strong>Naser Moghbel</strong>, a full-stack developer working mainly with Laravel, PHP, Vue.js and JavaScript. I build backend services and APIs, work with databases and third-party integrations, and implement the interfaces used by end users. I also use Node.js and Python when a project calls for them.",
+        heroEyebrow:"<span class=\"pulse\"></span> Full-stack Developer · PHP & Laravel",
+        heroTitle:"Full-stack development focused on <span class=\"gradient-text\">PHP & Laravel</span>",
+        heroLead:"I'm <strong>Naser Moghbel</strong>. Most of my hands-on experience is in developing and maintaining web applications with PHP and Laravel. I work on business features, APIs, payment integrations, and internal tools. I try to understand what a request needs to solve before deciding how to implement it.",
         heroPrimary:"View projects ↘",heroSecondary:"GitHub profile ↗",
-        factOne:"<b>01</b> Backend development",factTwo:"<b>02</b> Frontend implementation",factThree:"<b>03</b> APIs & integrations",
-        floatOne:"Laravel · Vue · PHP",floatTwo:"Backend & frontend",
-        aboutKicker:"Profile",aboutTitle:"What I work on",
-        aboutSub:"I develop and maintain web applications, with a focus on backend functionality and full-stack delivery.",
-        aboutP1:"My work covers application design and implementation: database structure, business logic, REST APIs, authentication, integrations, frontend components, and deployment. My main backend stack is PHP and Laravel, with Vue.js and JavaScript on the frontend.",
-        aboutP2:"I also use Node.js and Python for services, scripts, data collection, and automation. I work with relational databases such as MySQL and SQLite, and use Git, Linux, Docker, and Cloudflare tools where they fit the project.",
-        aboutP3:"I use AI coding assistants when useful, but I review and test code changes before including them in a project.",
-        focusTitle1:"Backend & API development",focusText1:"Laravel applications, business logic, database design, and REST APIs.",
-        focusTitle2:"Frontend development",focusText2:"Vue.js interfaces, responsive layouts, and API integration.",
-        focusTitle3:"Integrations & automation",focusText3:"Third-party services, messaging APIs, scripts, and crawlers.",
-        focusTitle4:"Deployment & maintenance",focusText4:"Linux environments, Docker, server configuration, and troubleshooting.",
-        stackKicker:"Technologies",stackTitle:"Technologies I use",
-        stackSub:"Languages, frameworks, and tools used across application development, integrations, and automation.",
-        stackBackend:"Backend & Languages",stackFrontend:"Frontend & Interface",stackInfra:"Data, Infrastructure & Tools",
-        stackNote:"Other areas include REST APIs, WebSockets, service integrations, and automation.",
+        factOne:"<b>01</b> Production applications",factTwo:"<b>02</b> Business integrations",factThree:"<b>03</b> Problem analysis",
+        floatOne:"PHP · Laravel · APIs",floatTwo:"Production systems",
+        aboutKicker:"Approach",aboutTitle:"How I work",
+        aboutSub:"I focus on understanding the requirement, making a practical change, and checking how it behaves in the actual product.",
+        aboutP1:"I usually work on existing products: understanding a request, identifying the part of the system it affects, implementing the change, and checking it before release. My work includes business features, APIs, payment integrations, database work, and production troubleshooting.",
+        aboutP2:"I also build supporting tools when a product needs them. Recent work includes an internal crawler for competitor and market data, and messaging bots connected to a financing platform. My regular tools include PHP, Laravel, Slim, MySQL, SQLite, Redis, Linux, Nginx, Supervisor, and Git.",
+        aboutP3:"I use AI-assisted development tools as part of my workflow, but I review the changes, run tests, and verify behavior myself before treating the work as complete.",
+        focusTitle1:"Product development",focusText1:"Extending existing applications and delivering features based on business requirements.",
+        focusTitle2:"Backend & integrations",focusText2:"PHP and Laravel services, REST APIs, payment gateways, and external systems.",
+        focusTitle3:"Problem solving",focusText3:"Investigating production issues, tracing causes, and validating fixes.",
+        focusTitle4:"Operations & maintenance",focusText4:"Linux servers, Nginx, process managers, deployment, and troubleshooting.",
+        navExperience:"Experience",
+        experienceKicker:"Experience",experienceTitle:"Recent professional work",experienceSub:"Development and maintenance work on a live financial product, alongside internal tools built for the team.",
+        experienceRole:"IT Specialist & Full-stack Developer",experienceDomain:"Financial technology",experienceDate:"Apr 2026 – Present",
+        experienceIntro:"My current work combines feature development and maintenance for a financing platform with around 9,100 registered users, plus the development of internal tools and messaging integrations.",
+        experienceItem1Title:"Production platform",experienceItem1:"The platform was already in operation when I joined. My contributions include a customer-loyalty area for the marketing team, payment-gateway management, and smaller product improvements.",
+        experienceItem2Title:"Competitor research crawler",experienceItem2:"Built an internal crawler from scratch, with guidance from the senior IT lead, to collect data from Farabourse and competitor websites. AI-assisted extraction results are presented in Apache Superset dashboards for a team of around 15.",
+        experienceItem3Title:"Messaging integrations",experienceItem3:"Developed Telegram and Bale bots for the financing platform’s user base.",
+        stackAdditional:"Additional experience",
+        stackKicker:"Technical skills",stackTitle:"Tools I work with",
+        stackSub:"A practical overview of the languages, frameworks, databases, and tools I have used in projects and day-to-day development.",
+        stackBackend:"Backend & APIs",stackFrontend:"Databases & Caching",stackInfra:"Infrastructure & Tooling",
+        stackNote:"These labels reflect hands-on experience, not certifications or claimed expertise in every tool.",
         projectsKicker:"Projects",projectsTitle:"Selected projects",
-        projectsSub:"A selection of public repositories, with a short overview of each project's purpose and implementation.",
+        projectsSub:"A few public projects whose code and implementation details are available to review on GitHub.",
         projectDesc1:"A watch-party application that synchronizes video playback between participants. It includes a Node.js and WebSocket server, plus a Cloudflare Workers implementation using Durable Objects.",
         projectDesc2:"A Laravel 12 dashboard for managing SMS activity across multiple websites. It includes message history, reporting, cost tracking, and an extensible structure for SMS providers.",
         projectDesc3:"A Windows utility written in Python that merges encrypted login records between local Chrome profiles. It includes a dry-run mode, conflict reporting, and SQLite backups; test with disposable profiles before using real data.",
@@ -609,9 +655,9 @@
         languageKicker:"Code distribution",languageTitle:"Top languages",
         statsFootnote:"Data comes directly from GitHub's public API. The activity chart uses recent public events, not private contribution data.",
         contactKicker:"Contact",contactTitle:"Get in touch",
-        contactText:"For project discussions, technical questions, or professional collaboration, you can reach me through GitHub.",
+        contactText:"For professional enquiries or a discussion about a project, the easiest way to reach me is through GitHub.",
         contactGithub:"GitHub profile ↗",contactRepos:"Browse repositories ↗",
-        footerText:"© <span id=\"year\"></span> Naser Moghbel. Full-stack developer · Web applications",
+        footerText:"© <span id=\"year\"></span> Naser Moghbel. Full-stack developer · PHP & Laravel",
         backTop:"Back to top",menuOpen:"Open navigation menu",menuClose:"Close navigation menu",
         loading:"Loading public GitHub data…",live:"Live data loaded from GitHub · refreshed every 15 minutes",
         preparingChart:"Preparing activity chart…",loadingLanguages:"Loading repository languages…",
@@ -630,10 +676,10 @@
       const t = translations[currentLang];
       document.documentElement.lang = currentLang;
       document.documentElement.dir = isFa ? "rtl" : "ltr";
-      document.title = isFa ? "ناصر مقبل — توسعه‌دهنده فول‌استک" : "Naser Moghbel — Full-Stack Developer";
+      document.title = isFa ? "ناصر مقبل — توسعه‌دهنده فول‌استک | PHP و Laravel" : "Naser Moghbel — Full-stack Developer | PHP & Laravel";
       document.querySelector('meta[name="description"]').content = isFa
-        ? "ناصر مقبل، توسعه‌دهنده فول‌استک با تمرکز بر PHP، Laravel، Vue.js، JavaScript، API و توسعه اپلیکیشن‌های وب."
-        : "Naser Moghbel — Full-Stack Developer working with Laravel, PHP, Vue.js, JavaScript, APIs, databases, and web application development.";
+        ? "ناصر مقبل، توسعه‌دهنده فول‌استک با تمرکز بر PHP و Laravel، اپلیکیشن‌های وب عملیاتی، API و اتصال درگاه‌های پرداخت."
+        : "Naser Moghbel — Full-stack developer focused on PHP, Laravel, production web applications, APIs, payment integrations, and business software.";
       document.querySelector('meta[property="og:title"]').content = document.title;
       document.querySelector('meta[property="og:description"]').content = t.heroLead.replace(/<[^>]*>/g,"");
       const put = (selector,key,html) => {
@@ -641,7 +687,7 @@
         if (el) el[html ? "innerHTML" : "textContent"] = t[key];
       };
       const map = [
-        [".nav-links a[href='#about']","navAbout"],[".nav-links a[href='#stack']","navStack"],
+        [".nav-links a[href='#about']","navAbout"],[".nav-links a[href='#experience']","navExperience"],[".nav-links a[href='#stack']","navStack"],
         [".nav-links a[href='#projects']","navProjects"],[".nav-links a[href='#stats']","navGithub"],
         [".eyebrow","heroEyebrow",true],[".hero-copy h1","heroTitle",true],[".hero-lead","heroLead",true],
         [".hero-actions .btn-primary","heroPrimary",true],[".hero-actions .btn-secondary","heroSecondary",true],
@@ -653,9 +699,14 @@
         ["#about .focus-item:nth-child(2) h3","focusTitle2"],["#about .focus-item:nth-child(2) p","focusText2"],
         ["#about .focus-item:nth-child(3) h3","focusTitle3"],["#about .focus-item:nth-child(3) p","focusText3"],
         ["#about .focus-item:nth-child(4) h3","focusTitle4"],["#about .focus-item:nth-child(4) p","focusText4"],
+        ["#experience .section-kicker","experienceKicker"],["#experience h2","experienceTitle"],["#experience .section-sub","experienceSub"],
+        [".experience-heading h3","experienceRole"],[".experience-domain","experienceDomain"],[".experience-date","experienceDate"],[".experience-intro","experienceIntro"],
+        [".experience-item:nth-child(1) h4","experienceItem1Title"],[".experience-item:nth-child(1) p","experienceItem1"],
+        [".experience-item:nth-child(2) h4","experienceItem2Title"],[".experience-item:nth-child(2) p","experienceItem2"],
+        [".experience-item:nth-child(3) h4","experienceItem3Title"],[".experience-item:nth-child(3) p","experienceItem3"],
         ["#stack .section-kicker","stackKicker"],["#stack h2","stackTitle"],["#stack .section-sub","stackSub"],
         ["#stack .stack-group:nth-child(1) .stack-title","stackBackend"],["#stack .stack-group:nth-child(2) .stack-title","stackFrontend"],
-        ["#stack .stack-group:nth-child(3) .stack-title","stackInfra"],["#stack .stack-note","stackNote"],
+        ["#stack .stack-group:nth-child(3) .stack-title","stackInfra"],["#stack .stack-group:nth-child(4) .stack-title","stackAdditional"],["#stack .stack-note","stackNote"],
         ["#projects .section-kicker","projectsKicker"],["#projects h2","projectsTitle"],["#projects .section-sub","projectsSub"],
         ["#projects .project-card:nth-child(1) p","projectDesc1"],["#projects .project-card:nth-child(2) p","projectDesc2"],
         ["#projects .project-card:nth-child(3) p","projectDesc3"],["#projects .project-card:nth-child(4) p","projectDesc4"],
